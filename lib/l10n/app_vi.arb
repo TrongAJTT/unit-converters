@@ -1,0 +1,1025 @@
+{
+  "@@locale": "vi",
+  "title": "Random Please",
+  "appVersion": "Phiên bản Ứng dụng",
+  "versionType": "Loại Phiên bản",
+  "versionTypeDev": "Phát triển",
+  "versionTypeBeta": "Beta",
+  "versionTypeRelease": "Phát hành",
+  "versionTypeDevDisplay": "Phiên bản phát triển",
+  "versionTypeBetaDisplay": "Phiên bản Beta",
+  "versionTypeReleaseDisplay": "Phiên bản phát hành",
+  "githubRepo": "Kho lưu trữ GitHub",
+  "githubRepoDesc": "Xem mã nguồn của ứng dụng trên GitHub",
+  "creditAck": "Ghi công tác giả",
+  "creditAckDesc": "Danh sách các thư viện, công cụ và nguồn tài nguyên đã sử dụng trong ứng dụng này.",
+  "donorsAck": "Ghi công người ủng hộ",
+  "donorsAckDesc": "Danh sách đánh giá của những người ủng hộ công khai. Cảm ơn các bạn rất nhiều!",
+  "supportDesc": "Random Please giúp bạn tạo dữ liệu ngẫu nhiên một cách dễ dàng, thuận tiện và miễn phí. Nếu bạn thấy ứng dụng hữu ích, hãy cân nhắc hỗ trợ mình để giúp mình duy trì và phát triển ứng dụng này. Cảm ơn bạn rất nhiều!",
+  "supportOnGitHub": "Hỗ trợ trên GitHub",
+  "donate": "Ủng hộ",
+  "donateDesc": "Hỗ trợ tôi nếu bạn thấy ứng dụng này hữu ích",
+  "oneTimeDonation": "Ủng hộ một lần",
+  "momoDonateDesc": "Hỗ trợ tôi qua Momo",
+  "donorBenefits": "Lợi ích của người ủng hộ",
+  "donorBenefit1": "Được liệt kê trong phần cảm ơn và chia sẻ ý kiến của bạn (nếu bạn muốn).",
+  "donorBenefit2": "Xem xét phản hồi ưu tiên.",
+  "donorBenefit3": "Truy cập vào các phiên bản beta (debug) của phần mềm khác của tôi P2Lan Transfer, tuy nhiên không đảm bảo cập nhật thường xuyên.",
+  "settings": "Cài đặt",
+  "theme": "Chủ đề",
+  "language": "Ngôn ngữ",
+  "userInterface": "Giao diện người dùng",
+  "userInterfaceDesc": "Cài đặt chủ đề và ngôn ngữ và phong cách hiển thị",
+  "converterTools": "Công cụ Chuyển đổi",
+  "converterToolsDesc": "Lịch sử, trạng thái, sắp xếp công cụ và bảo vệ dữ liệu",
+  "randomTools": "Công cụ Ngẫu nhiên",
+  "randomToolsDesc": "Cài đặt cho các công cụ tạo ngẫu nhiên",
+  "dataManager": "Quản lý dữ liệu",
+  "dataManagerDesc": "Xóa toàn bộ dữ liệu",
+  "system": "Theo hệ thống",
+  "light": "Sáng",
+  "dark": "Tối",
+  "english": "Tiếng Anh",
+  "vietnamese": "Tiếng Việt",
+  "cache": "Bộ nhớ đệm",
+  "clearCache": "Xóa bộ nhớ đệm",
+  "cacheSize": "Kích thước bộ nhớ đệm",
+  "clearAllCache": "Xóa tất cả bộ nhớ đệm",
+  "viewLogs": "Xem nhật ký",
+  "clearLogs": "Xóa nhật ký",
+  "logRetention": "Thời gian lưu nhật ký",
+  "logRetentionDays": "{days} ngày",
+  "@logRetentionDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "logRetentionForever": "Vĩnh viễn",
+  "logRetentionDescDetail": "Nhật ký sẽ được lưu trữ trong bộ nhớ đệm và có thể được xóa tự động sau một khoảng thời gian nhất định. Bạn có thể đặt thời gian lưu giữ nhật ký từ 5 đến 30 ngày (bước nhảy 5 ngày) hoặc chọn lưu vĩnh viễn.",
+  "dataAndStorage": "Dữ liệu & Lưu trữ",
+  "close": "Đóng",
+  "options": "Tùy chọn",
+  "about": "Giới thiệu",
+  "add": "Thêm",
+  "copy": "Sao chép",
+  "cancel": "Hủy",
+  "history": "Lịch sử",
+  "random": "Trình tạo ngẫu nhiên",
+  "randomDesc": "Tạo mật khẩu, số, ngày và nhiều thứ ngẫu nhiên khác",
+  "textTemplateGen": "Tạo văn bản theo mẫu",
+  "textTemplateGenDesc": "Tạo văn bản theo biểu mẫu có sẵn. Bạn có thể tạo các mẫu văn bản với các trường thông tin cần điền như văn bản, số, ngày tháng để sử dụng lại nhiều lần.",
+  "holdToDeleteInstruction": "Nhấn giữ nút xóa trong 5 giây để xác nhận",
+  "holdToDelete": "Nhấn giữ để xóa...",
+  "deleting": "Đang xóa...",
+  "passwordGenerator": "Tạo mật khẩu",
+  "passwordGeneratorDesc": "Tạo mật khẩu ngẫu nhiên an toàn",
+  "numCharacters": "Số ký tự",
+  "includeLowercase": "Bao gồm chữ thường",
+  "includeUppercase": "Bao gồm chữ hoa",
+  "includeNumbers": "Bao gồm số",
+  "includeSpecial": "Bao gồm ký tự đặc biệt",
+  "generate": "Tạo",
+  "generatedAtTime": "Tạo vào {time}",
+  "@generatedAtTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "generatedPassword": "Mật khẩu đã tạo",
+  "copyToClipboard": "Sao chép",
+  "copied": "Đã sao chép!",
+  "numberGenerator": "Tạo số ngẫu nhiên",
+  "numberGeneratorDesc": "Tạo dãy số và chuỗi số ngẫu nhiên",
+  "integers": "Số nguyên",
+  "floatingPoint": "Số thực",
+  "minValue": "Giá trị tối thiểu",
+  "maxValue": "Giá trị tối đa",
+  "quantity": "Số lượng",
+  "allowDuplicates": "Cho phép trùng lặp",
+  "generatedNumbers": "Số đã tạo",
+  "includeSeconds": "Hiển thị số giây",
+  "yesNo": "Có hay Không?",
+  "yesNoDesc": "Nhận quyết định có/không nhanh chóng",
+  "flipCoin": "Tung đồng xu",
+  "flipCoinDesc": "Tung đồng xu ảo để chọn lựa ngẫu nhiên",
+  "rockPaperScissors": "Kéo búa bao",
+  "rockPaperScissorsDesc": "Chơi trò chơi kinh điển bằng tay",
+  "rollDice": "Tung xúc xắc",
+  "rollDiceDesc": "Tung xúc xắc ảo với số mặt tùy chỉnh",
+  "diceCount": "Số lượng xúc xắc",
+  "diceSides": "Số mặt mỗi xúc xắc",
+  "colorGenerator": "Tạo màu ngẫu nhiên",
+  "colorGeneratorDesc": "Tạo màu sắc và bảng màu ngẫu nhiên",
+  "generatedColor": "Màu đã tạo",
+  "latinLetters": "Chữ cái Latin",
+  "latinLettersDesc": "Tạo chữ cái alphabet ngẫu nhiên",
+  "letterCount": "Số lượng chữ cái",
+  "playingCards": "Bài tây",
+  "playingCardsDesc": "Rút thẻ bài ngẫu nhiên",
+  "includeJokers": "Bao gồm lá Joker",
+  "cardCount": "Số lượng lá bài",
+  "from": "Từ",
+  "actions": "Hành động",
+  "delete": "Xóa",
+  "dateGenerator": "Tạo ngày ngẫu nhiên",
+  "dateGeneratorDesc": "Tạo ngày tháng ngẫu nhiên trong khoảng",
+  "startDate": "Ngày bắt đầu",
+  "endDate": "Ngày kết thúc",
+  "dateCount": "Số lượng ngày",
+  "timeGenerator": "Tạo giờ ngẫu nhiên",
+  "timeGeneratorDesc": "Tạo thời gian trong ngày ngẫu nhiên",
+  "startTime": "Giờ bắt đầu",
+  "endTime": "Giờ kết thúc",
+  "timeCount": "Số lượng giờ",
+  "dateTimeGenerator": "Tạo ngày giờ ngẫu nhiên",
+  "dateTimeGeneratorDesc": "Tạo kết hợp ngày và giờ ngẫu nhiên",
+  "heads": "Sấp",
+  "tails": "Ngửa",
+  "rock": "Búa",
+  "paper": "Bao",
+  "scissors": "Kéo",
+  "randomResult": "Kết quả",
+  "skipAnimation": "Bỏ qua hoạt ảnh",
+  "skipAnimationDesc": "Tắt hoạt ảnh để có kết quả nhanh hơn",
+  "historyManager": "Quản lý lịch sử",
+  "latinLetterGenerationError": "Không thể tạo {count} chữ cái duy nhất từ bộ có sẵn. Vui lòng giảm số lượng hoặc cho phép trùng lặp.",
+  "confirmClearAllCache": "Bạn có chắc chắn muốn xóa TẤT CẢ dữ liệu trong bộ nhớ đệm không? Thao tác này sẽ xóa tất cả bản lịch sử đã lưu trong toàn bộ công cụ nhưng vẫn giữ lại cài đặt của bạn.",
+  "cannotClearFollowingCaches": "Không thể xóa các bộ nhớ đệm sau vì chúng đang được sử dụng:",
+  "allCacheCleared": "Đã xóa tất cả bộ nhớ đệm thành công",
+  "saveGenerationHistory": "Ghi nhớ lịch sử tạo",
+  "saveGenerationHistoryDesc": "Ghi nhớ và hiển thị lịch sử các mục đã tạo",
+  "generationHistory": "Lịch sử tạo",
+  "generatedAt": "Tạo lúc",
+  "noHistoryYet": "Chưa có lịch sử",
+  "noHistoryMessage": "Lịch sử tạo của bạn sẽ xuất hiện ở đây",
+  "clearHistory": "Xóa lịch sử",
+  "confirmClearHistory": "Bạn có chắc chắn muốn xóa lịch sử không?",
+  "confirmClearHistoryMessage": "Điều này sẽ xóa tất cả các mục lịch sử đã lưu. Hành động này không thể hoàn tác.\nHãy chắc chắn rằng bạn đã lưu bất kỳ kết quả quan trọng nào trước khi tiếp tục.",
+  "clearAllItems": "Xóa Tất Cả Lịch Sử",
+  "confirmClearAllHistory": "Bạn có chắc chắn muốn xóa TẤT CẢ lịch sử không? Điều này sẽ xóa tất cả lịch sử của công cụ này ngay cả các mục đã ghim của bạn.\nHãy chắc chắn rằng bạn đã lưu bất kỳ kết quả quan trọng nào trước khi tiếp tục.",
+  "clearPinnedItems": "Xóa Các Mục Đã Ghim",
+  "clearPinnedItemsDesc": "Xóa tất cả các mục đã ghim khỏi lịch sử? Điều này sẽ không ảnh hưởng đến các mục chưa ghim.\nHãy chắc chắn rằng bạn đã lưu bất kỳ kết quả quan trọng nào trước khi tiếp tục.",
+  "clearUnpinnedItems": "Xóa Các Mục Chưa Ghim",
+  "clearUnpinnedItemsDesc": "Xóa tất cả các mục chưa ghim khỏi lịch sử? Điều này sẽ không ảnh hưởng đến các mục đã ghim.\nHãy chắc chắn rằng bạn đã lưu bất kỳ kết quả quan trọng nào trước khi tiếp tục.",
+  "typeConfirmToProceed": "Nhập \"confirm\" để tiếp tục:",
+  "clearAll": "Xóa tất cả",
+  "converterTools": "Công cụ chuyển đổi",
+  "converterToolsDesc": "Chuyển đổi giữa các đơn vị và hệ thống khác nhau",
+  "calculatorTools": "Công cụ tính toán",
+  "calculatorToolsDesc": "Các máy tính chuyên dụng cho sức khỏe, tài chính và hơn thế nữa",
+  "value": "Giá trị",
+  "monday": "Thứ hai",
+  "tuesday": "Thứ ba",
+  "wednesday": "Thứ tư",
+  "thursday": "Thứ năm",
+  "friday": "Thứ sáu",
+  "saturday": "Thứ bảy",
+  "sunday": "Chủ nhật",
+  "january": "Tháng 1",
+  "february": "Tháng 2",
+  "march": "Tháng 3",
+  "april": "Tháng 4",
+  "may": "Tháng 5",
+  "june": "Tháng 6",
+  "july": "Tháng 7",
+  "august": "Tháng 8",
+  "september": "Tháng 9",
+  "october": "Tháng 10",
+  "november": "Tháng 11",
+  "december": "Tháng 12",
+  "historyCleared": "Đã xóa lịch sử tính toán",
+  "pinnedHistoryCleared": "Đã xóa lịch sử ghim",
+  "unpinnedHistoryCleared": "Đã xóa lịch sử chưa ghim",
+  "clearAllHistory": "Xóa toàn bộ lịch sử tính toán",
+  "success": "Thành công",
+  "calculate": "Tính toán",
+  "calculating": "Đang tính toán...",
+  "unknown": "Không rõ",
+  "logsManagement": "Quản lý log ứng dụng và cài đặt lưu trữ",
+  "statusInfo": "Trạng thái: {info}",
+  "@statusInfo": {
+    "placeholders": {
+      "info": {
+        "type": "String"
+      }
+    }
+  },
+  "logsAvailable": "Log khả dụng",
+  "scrollToTop": "Lên đầu trang",
+  "scrollToBottom": "Xuống cuối trang",
+  "logActions": "Hành động log",
+  "logApplication": "Nhật ký Ứng dụng",
+  "previousChunk": "Phần trước",
+  "nextChunk": "Phần sau",
+  "loadAll": "Tải tất cả",
+  "firstPart": "Phần đầu",
+  "lastPart": "Phần cuối",
+  "largeFile": "File lớn",
+  "loadingLargeFile": "Đang tải file lớn...",
+  "loadingLogContent": "Đang tải nội dung log...",
+  "largeFileDetected": "Phát hiện file lớn. Đang sử dụng tải tối ưu...",
+  "focusModeEnabled": "Chế độ tập trung",
+  "@focusModeEnabled": {
+    "description": "Focus mode setting label"
+  },
+  "saveRandomToolsState": "Lưu trạng thái Random Tools",
+  "@saveRandomToolsState": {
+    "description": "Save random tools state setting label"
+  },
+  "saveRandomToolsStateDesc": "Tự động lưu cài đặt công cụ khi tạo kết quả",
+  "@saveRandomToolsStateDesc": {
+    "description": "Save random tools state setting description"
+  },
+  "holdToClearCache": "Nhấn giữ để xóa...",
+  "clearingCache": "Đang xóa cache...",
+  "aspectRatio": "Tỉ lệ khung hình",
+  "reset": "Đặt lại",
+  "info": "Thông tin",
+  "deletingOldLogs": "Đang xóa log cũ...",
+  "deletedOldLogFiles": "Đã xóa {count} file log cũ",
+  "@deletedOldLogFiles": {
+    "description": "Thông báo số file log cũ đã được xóa",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "noOldLogFilesToDelete": "Không có file log cũ nào để xóa",
+  "errorDeletingLogs": "Lỗi khi xóa log: {error}",
+  "@errorDeletingLogs": {
+    "description": "Thông báo lỗi khi xóa log thất bại",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Không có quyền truy cập"
+      }
+    }
+  },
+  "p2pDataTransfer": "Truyền Dữ Liệu P2P",
+  "p2pDataTransferDesc": "Truyền tệp giữa các thiết bị trong cùng mạng cục bộ.",
+  "clear": "Xóa",
+  "debug": "Gỡ lỗi",
+  "remove": "Xóa",
+  "none": "Không",
+  "storage": "Lưu trữ",
+  "moveTo": "Di chuyển vào",
+  "share": "Chia sẻ",
+  "quickAccess": "Truy cập nhanh",
+  "colorFormat": "Định dạng màu",
+
+  "aboutToOpenUrlOutsideApp": "Bạn sắp mở một URL bên ngoài ứng dụng. Bạn có muốn tiếp tục không?",
+  "ccontinue": "Tiếp tục",
+  "errorOpeningUrl": "Lỗi khi mở URL",
+  "canNotOpenUrl": "Không thể mở URL",
+  "linkCopiedToClipboard": "Liên kết đã được sao chép vào clipboard",
+
+  "refresh": "Làm mới",
+  "loading": "Đang tải...",
+  "retry": "Thử lại",
+  "supporterS": "Người ủng hộ",
+  "thanksLibAuthor": "Cảm ơn bạn, Tác giả Thư viện!",
+  "thanksLibAuthorDesc": "Ứng dụng này sử dụng một số thư viện mã nguồn mở giúp cho nó trở nên khả thi. Chúng tôi rất biết ơn tất cả các tác giả vì những nỗ lực và sự cống hiến của họ.",
+  "thanksDonors": "Cảm ơn những người ủng hộ!",
+  "thanksDonorsDesc": "Đặc biệt cảm ơn những người ủng hộ đã hỗ trợ phát triển ứng dụng này. Những đóng góp của bạn giúp chúng tôi tiếp tục cải thiện và duy trì dự án.",
+  "thanksForUrSupport": "Cảm ơn sự hỗ trợ của bạn!",
+  "pressBackAgainToExit": "Nhấn quay lại lần nữa để thoát ứng dụng",
+
+  "checkingForUpdates": "Đang kiểm tra cập nhật...",
+  "noNewUpdates": "Không có cập nhật mới",
+  "updateCheckError": "Lỗi khi kiểm tra cập nhật: {errorMessage}",
+  "@updateCheckError": {
+    "placeholders": {
+      "errorMessage": {
+        "type": "String"
+      }
+    }
+  },
+  "usingLatestVersion": "Bạn đang sử dụng phiên bản mới nhất",
+  "newVersionAvailable": "Phiên bản mới có sẵn",
+  "latest": "Mới nhất",
+  "currentVersion": "Hiện tại: {version}",
+  "@currentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "publishDate": "Ngày phát hành: {publishDate}",
+  "@publishDate": {
+    "placeholders": {
+      "publishDate": {
+        "type": "String"
+      }
+    }
+  },
+  "releaseNotes": "Ghi chú phiên bản",
+  "noReleaseNotes": "Không có ghi chú phiên bản",
+  "alreadyLatestVersion": "Đã là phiên bản mới nhất",
+  "download": "Tải về",
+  "selectVersionToDownload": "Chọn phiên bản để tải",
+  "selectPlatform": "Chọn nền tảng",
+  "downloadPlatform": "Tải xuống cho {platform}",
+  "@downloadPlatform": {
+    "placeholders": {
+      "platform": {
+        "type": "String"
+      }
+    }
+  },
+  "noDownloadsAvailable": "Không có tải xuống nào khả dụng",
+  "downloadApp": "Tải ứng dụng",
+  "downloadAppDesc": "Tải ứng dụng để sử dụng ngoại tuyến khi không có kết nối internet",
+  "filteredForPlatform": "Đã lọc cho {getPlatformName}",
+  "@filteredForPlatform": {
+    "placeholders": {
+      "getPlatformName": {
+        "type": "String"
+      }
+    }
+  },
+  "sizeInMB": "Kích thước: {sizeInMB}",
+  "@sizeInMB": {
+    "placeholders": {
+      "sizeInMB": {
+        "type": "String"
+      }
+    }
+  },
+  "uploadDate": "Ngày tải lên: {updatedAt}",
+  "@uploadDate": {
+    "placeholders": {
+      "updatedAt": {
+        "type": "String"
+      }
+    }
+  },
+  "confirmDelete": "Xác nhận xóa",
+  "confirmDownload": "Xác nhận tải xuống",
+  "confirmDownloadMessage": "Bạn có chắc chắn muốn tải phiên bản này xuống?\n\nTên tệp: {name}\nKích thước: {sizeInMB}",
+  "@confirmDownloadMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sizeInMB": {
+        "type": "String"
+      }
+    }
+  },
+  "currentPlatform": "Nền tảng hiện tại",
+  "eerror": "Lỗi",
+
+  "termsOfUse": "Điều khoản sử dụng",
+  "termsOfUseView": "Xem Điều khoản sử dụng của ứng dụng này",
+  "versionInfo": "Thông tin phiên bản",
+  "checkForNewVersion": "Kiểm tra phiên bản mới",
+  "checkForNewVersionDesc": "Kiểm tra xem có phiên bản mới của ứng dụng không và tải về bản mới nhất nếu có",
+  "platform": "Nền tảng",
+  "fileS": "Tệp tin",
+
+  "alsoViewAuthorOtherProducts": "Cũng xem các sản phẩm khác của tác giả",
+  "authorProducts": "Sản phẩm khác",
+  "authorProductsDesc": "Xem các sản phẩm khác của tác giả, có thể bạn sẽ quan tâm!",
+  "authorProductsMessage": "Chào bạn! Đây là một số sản phẩm khác của tôi. Nếu bạn quan tâm, đừng ngần ngại xem qua nhé! Tôi hy vọng bạn sẽ tìm thấy điều gì đó hữu ích trong số này. Cảm ơn bạn đã ghé thăm!",
+  "noOtherProducts": "Không có sản phẩm nào khác",
+  "loadingProducts": "Đang tải sản phẩm...",
+  "failedToLoadProducts": "Không thể tải sản phẩm",
+  "retryLoadProducts": "Thử tải lại sản phẩm",
+  "visitProduct": "Xem sản phẩm",
+  "productCount": "{count} sản phẩm",
+  "@productCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
+  "deleteHistoryItem": "Xóa mục",
+  "tapDeleteAgainToConfirm": "Nhấn xóa lần nữa để xác nhận",
+  "historyItemDeleted": "Mục lịch sử đã bị xóa",
+  "pinHistoryItem": "Ghim mục",
+  "unpinHistoryItem": "Bỏ ghim mục",
+  "historyItemPinned": "Mục đã được ghim",
+  "historyItemUnpinned": "Mục đã bỏ ghim",
+
+  "securitySetupTitle": "Thiết lập bảo mật ứng dụng",
+  "securitySetupMessage": "Bạn có muốn thiết lập mật khẩu chính để bảo vệ dữ liệu không?\nĐiều này sẽ bảo vệ lịch sử khỏi truy cập trái phép và chống đánh cắp dữ liệu.",
+  "setMasterPassword": "Đặt mật khẩu chính",
+  "skipSecurity": "Bỏ qua (Sử dụng không cần mật khẩu)",
+  "createMasterPasswordTitle": "Tạo mật khẩu chính",
+  "createMasterPasswordMessage": "Vui lòng tạo một mật khẩu chính mạnh.\nHãy nhớ kỹ mật khẩu này.\nnếu quên, toàn bộ dữ liệu sẽ bị mất.",
+  "enterPassword": "Nhập mật khẩu",
+  "confirm": "Xác nhận",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "passwordMismatch": "Mật khẩu không khớp",
+  "passwordTooShort": "Mật khẩu phải có ít nhất 6 ký tự",
+  "showPassword": "Hiện mật khẩu",
+  "hidePassword": "Ẩn mật khẩu",
+  "enterMasterPasswordTitle": "Nhập mật khẩu chính",
+  "enterMasterPasswordMessage": "Vui lòng nhập mật khẩu chính để truy cập ứng dụng.",
+  "wrongPassword": "Sai mật khẩu. Vui lòng thử lại.",
+  "forgotPasswordButton": "Tôi đã quên mật khẩu và chấp nhận mất dữ liệu",
+  "confirmDataLossTitle": "Xác nhận mất dữ liệu",
+  "confirmDataLossMessage": "Bạn sẽ có thể tiếp tục sử dụng ứng dụng mà không cần nhập mật khẩu, nhưng toàn bộ dữ liệu lịch sử sẽ bị xóa vĩnh viễn.\nHành động này không thể hoàn tác.",
+  "holdToConfirm": "Giữ để xác nhận",
+  "dataProtectionSettings": "Cài đặt bảo vệ dữ liệu",
+  "enableDataProtection": "Bật bảo vệ dữ liệu",
+  "disableDataProtection": "Tắt bảo vệ dữ liệu",
+  "dataProtectionEnabled": "Bảo vệ dữ liệu hiện đang được bật",
+  "dataProtectionDisabled": "Bảo vệ dữ liệu hiện đang được tắt",
+  "enterCurrentPassword": "Nhập mật khẩu hiện tại để tắt bảo vệ",
+  "securityEnabled": "Bảo mật đã được bật thành công",
+  "securityDisabled": "Bảo mật đã được tắt thành công",
+  "migrationInProgress": "Đang di chuyển dữ liệu...",
+  "migrationCompleted": "Hoàn tất di chuyển dữ liệu",
+  "migrationFailed": "Di chuyển dữ liệu thất bại",
+
+  "solid": "Đặc",
+  "includeAlpha": "Bao gồm dãy màu Alpha",
+  "totalANumber": "Tổng: {total}",
+  "@totalANumber": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "numberType": "Loại số",
+
+  "yes": "Có",
+  "no": "Không",
+  "dateErrStartEndConflict": "Ngày bắt đầu không thể sau ngày kết thúc",
+  
+  "arrangeTools": "Sắp xếp công cụ",
+  "arrangeToolsDesc": "Tùy chỉnh thứ tự các công cụ trong giao diện",
+  "howToArrangeTools": "Cách sắp xếp công cụ",
+  "dragAndDropToReorder": "Kéo và thả để sắp xếp lại các công cụ theo ý muốn",
+  "defaultOrder": "Thứ tự mặc định",
+  "save": "Lưu",
+  "reloadTools": "Tải lại công cụ",
+  "compactTabLayout": "Bố cục tab thu gọn",
+  "compactTabLayoutDesc": "Ẩn biểu tượng trong tab để có giao diện gọn hơn",
+  "letterCountRange": "Khoảng số lượng chữ cái",
+  "numberRangeFromTo": "Khoảng giá trị: Từ {from} đến {to}",
+  "@numberRangeFromTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "loremIpsumGenerator": "Tạo văn bản giả",
+  "loremIpsumGeneratorDesc": "Lorem Ipsum",
+  "generationType": "Loại tạo văn bản",
+  "words": "Từ",
+  "sentences": "Câu",
+  "paragraphs": "Đoạn văn",
+  "wordCount": "Số lượng từ",
+  "numberOfWordsToGenerate": "Số lượng từ cần tạo",
+  "sentenceCount": "Số lượng câu",
+  "numberOfSentencesToGenerate": "Số lượng câu cần tạo", 
+  "paragraphCount": "Số lượng đoạn văn",
+  "numberOfParagraphsToGenerate": "Số lượng đoạn văn cần tạo",
+  "startWithLorem": "Bắt đầu bằng Lorem",
+  "startWithLoremDesc": "Bắt đầu bằng câu kinh điển 'Lorem ipsum dolor sit amet...'",
+  "listPicker": "Chọn từ danh sách",
+  "listPickerDesc": "Chọn từ các danh sách tùy chỉnh",
+  "selectList": "Chọn danh sách",
+  "createNewList": "Tạo danh sách mới",
+  "noListsAvailable": "Không có danh sách nào",
+  "selectOrCreateList": "Chọn hoặc tạo danh sách để bắt đầu chọn",
+  "manageList": "Quản lý danh sách",
+  "addItem": "Thêm mục",
+  "items": "Items",
+  "generatorOptions": "Tùy chọn trình tạo",
+  "allowDuplicatesDescription": "Cho phép chọn cùng một mục nhiều lần",
+  "results": "Kết quả",
+  "generateRandom": "Chọn ngẫu nhiên",
+  "listName": "Tên danh sách",
+  "create": "Tạo",
+  "listPickerMode": "Chế độ",
+  "modeRandom": "Ngẫu nhiên",
+  "modeRandomDesc": "Chọn các mục ngẫu nhiên từ danh sách",
+  "modeShuffle": "Xáo trộn",
+  "modeShuffleDesc": "Xáo trộn và chọn các mục theo thứ tự",
+  "modeTeam": "Chia đội",
+  "modeTeamDesc": "Chia các mục thành các đội",
+  "createListDialog": "Tạo danh sách mới",
+  "enterListName": "Nhập tên danh sách (tối đa 30 ký tự)",
+  "listNameRequired": "Tên danh sách là bắt buộc",
+  "listNameTooLong": "Tên danh sách quá dài (tối đa 30 ký tự)",
+  "listNameExists": "Đã tồn tại danh sách với tên này",
+  "teams": "Đội",
+  "itemsPerTeam": "Số mục mỗi đội",
+  "addSingleItem": "Thêm một mục",
+  "addMultipleItems": "Thêm nhiều mục",
+  "addBatchItems": "Thêm nhiều mục",
+  "enterItemsOneLine": "Nhập các mục, mỗi dòng một mục:",
+  "batchItemsPlaceholder": "Mục 1\nMục 2\nMục 3\n...",
+  "previewItems": "Xem trước: {count} mục",
+  "@previewItems": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addItems": "Thêm mục",
+  "confirmAddItems": "Xác nhận thêm mục",
+  "confirmAddItemsMessage": "Thêm {count} mục vào \"{listName}\"?",
+  "@confirmAddItemsMessage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "listName": {
+        "type": "String"
+      }
+    }
+  },
+  "addedItemsSuccessfully": "Đã thêm {count} mục thành công",
+  "@addedItemsSuccessfully": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "enterAtLeastOneItem": "Vui lòng nhập ít nhất một mục",
+  "maximumItemsAllowed": "Tối đa 100 mục được phép",
+  "deleteList": "Xóa danh sách",
+  "deleteListConfirm": "Bạn có chắc chắn muốn xóa \"{listName}\"? Hành động này không thể hoàn tác.",
+  "@deleteListConfirm": {
+    "placeholders": {
+      "listName": {
+        "type": "String"
+      }
+    }
+  },
+  "expand": "Mở rộng",
+  "collapse": "Thu gọn",
+  "viewDetails": "Xem chi tiết",
+  "renameList": "Đổi tên danh sách",
+  "renameItem": "Đổi tên mục",
+  "renameListDialog": "Đổi tên danh sách",
+  "renameItemDialog": "Đổi tên mục",
+  "enterNewListName": "Nhập tên danh sách mới (tối đa 30 ký tự)",
+  "enterNewItemName": "Nhập tên mục mới (tối đa 30 ký tự)",
+  "rename": "Đổi tên",
+  "newNameRequired": "Tên mới là bắt buộc",
+  "newNameTooLong": "Tên mới quá dài (tối đa 30 ký tự)",
+  "template": "Mẫu",
+  "templates": "Các mẫu",
+  "cloudTemplates": "Mẫu trên đám mây",
+  "noInternetConnection": "Không có kết nối internet",
+  "pleaseConnectAndTryAgain": "Vui lòng kết nối internet và thử lại",
+  "languageCode": "Ngôn ngữ",
+  "itemsCount": "{count} mục",
+  "@itemsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "import": "Nhập",
+  "languageNotMatch": "Không khớp ngôn ngữ",
+  "templateNotDesignedForLanguage": "Mẫu này không được thiết kế cho ngôn ngữ của bạn.\nBạn có muốn tiếp tục không?",
+  "fetchingTemplates": "Đang lấy các mẫu...",
+  "noTemplatesAvailable": "Không có mẫu nào",
+  "selectTemplate": "Chọn một mẫu để nhập",
+  "templateImported": "Nhập mẫu thành công",
+  "continueButton": "Tiếp tục",
+  "importingTemplate": "Đang nhập mẫu...",
+  "errorImportingTemplate": "Lỗi khi nhập mẫu",
+  "enter": "Nhập",
+  "increase": "Tăng",
+  "decrease": "Giảm",
+  "range": "Phạm vi",
+      "currencyConverter": "Quy đổi tiền tệ",
+    "currencyConverterDesc": "Quy đổi giữa các loại tiền tệ với tỷ giá thời gian thực",
+    "updatingRates": "Đang cập nhật tỷ giá tiền tệ...",
+    "lastUpdatedAt": "Cập nhật lần cuối: {date} lúc {time}",
+    "noRatesAvailable": "Chưa có thông tin tỷ giá tiền tệ, đang lấy tỷ giá...",
+    "liveRates": "Trực tiếp",
+    "staticRates": "Tĩnh",
+    "refreshRates": "Làm mới tỷ giá",
+    "resetLayout": "Đặt lại bố cục",
+    "confirmResetLayout": "Xác nhận đặt lại bố cục",
+    "confirmResetLayoutMessage": "Thao tác này sẽ đặt lại tất cả các thẻ và các đơn vị hiển thị về trạng thái mặc định. Không thể hoàn tác hành động này.",
+    "confirm": "Xác nhận",
+    "customizeCurrencies": "Tùy chỉnh loại tiền",
+    "addCard": "Thêm thẻ",
+    "addRow": "Thêm dòng",
+    "cardView": "Chế độ thẻ",
+    "cards": "Thẻ",
+    "rows": "Hàng",
+    "converter": "Bộ chuyển đổi",
+    "amount": "Số tiền",
+    "quantity": "Số lượng",
+    "from": "Từ",
+    "fromCurrency": "Từ loại tiền",
+    "convertedTo": "Chuyển đổi thành",
+    "removeCard": "Xóa thẻ",
+    "removeRow": "Xóa dòng",
+    "liveRatesUpdated": "Đã cập nhật tỷ giá trực tiếp thành công",
+    "staticRatesUsed": "Đang sử dụng tỷ giá tĩnh (không có dữ liệu trực tiếp)",
+    "failedToUpdateRates": "Không thể cập nhật tỷ giá",
+    "actions": "Hành động",
+    "customizeCurrenciesDialog": "Tùy chỉnh tiền tệ",
+    "searchCurrencies": "Tìm kiếm tiền tệ...",
+    "noCurrenciesFound": "Không tìm thấy tiền tệ",
+    "currenciesSelected": "Đã chọn {count} loại tiền",
+    "applyChanges": "Áp dụng thay đổi",
+    "currencyStatusSuccess": "Tỷ giá trực tiếp",
+    "currencyStatusFailed": "Lỗi lấy dữ liệu",
+    "currencyStatusTimeout": "Hết thời gian",
+    "currencyStatusNotSupported": "Không hỗ trợ",
+    "currencyStatusStatic": "Tỷ giá tĩnh",
+    "currencyStatusFetchedRecently": "Đã fetch gần đây",
+    "currencyStatusSuccessDesc": "Đã lấy tỷ giá trực tiếp thành công",
+    "currencyStatusFailedDesc": "Không thể lấy tỷ giá trực tiếp, sử dụng tỷ giá tĩnh",
+    "currencyStatusTimeoutDesc": "Hết thời gian chờ, sử dụng tỷ giá tĩnh",
+    "currencyStatusNotSupportedDesc": "API không hỗ trợ loại tiền này",
+    "currencyStatusStaticDesc": "Đang sử dụng tỷ giá tĩnh",
+    "currencyStatusFetchedRecentlyDesc": "Đã fetch thành công trong vòng 1 giờ qua",
+    "currencyConverterInfo": "Thông tin chuyển đổi tiền tệ",
+    "aboutThisFeature": "Về chức năng này",
+    "aboutThisFeatureDesc": "Chuyển đổi tiền tệ cho phép bạn quy đổi giữa các loại tiền khác nhau bằng tỷ giá trực tiếp hoặc tỷ giá tĩnh. Hỗ trợ hơn 80 loại tiền tệ trên thế giới.",
+    "howToUse": "Cách sử dụng",
+    "howToUseDesc": "• Thêm hoặc xóa thẻ/dòng cho nhiều phép chuyển đổi\n• Tùy chỉnh các loại tiền hiển thị\n• Chuyển đổi giữa chế độ thẻ và bảng\n• Tỷ giá tự động cập nhật theo cài đặt của bạn",
+    "staticRatesInfo": "Tỷ giá tĩnh",
+    "staticRatesInfoDesc": "Tỷ giá tĩnh là giá trị dự phòng được sử dụng khi không thể lấy tỷ giá trực tiếp. Các tỷ giá này được cập nhật định kỳ và có thể không phản ánh giá thị trường thời gian thực.",
+    "viewStaticRates": "Xem tỷ giá tĩnh",
+    "lastStaticUpdate": "Lần cập nhật tỷ giá tĩnh cuối: Tháng 5/2025",
+    "staticRatesList": "Danh sách tỷ giá tĩnh",
+    "rateBasedOnUSD": "Tất cả tỷ giá dựa trên 1 USD",
+    "maxCurrenciesSelected": "Tối đa 10 loại tiền có thể được chọn",
+    "savePreset": "Lưu Cấu Hình",
+    "loadPreset": "Lấy Cấu Hình",
+    "presetName": "Tên Cấu Hình",
+    "enterPresetName": "Nhập tên cấu hình",
+    "presetNameRequired": "Tên cấu hình là bắt buộc",
+    "presetSaved": "Cấu hình đã được lưu thành công",
+    "presetLoaded": "Cấu hình đã được tải thành công",
+    "presetDeleted": "Cấu hình đã được xóa thành công",
+    "deletePreset": "Xóa Cấu Hình",
+    "confirmDeletePreset": "Bạn có chắc chắn muốn xóa cấu hình này không?",
+    "sortBy": "Sắp xếp theo",
+    "sortByName": "Tên",
+    "sortByDate": "Ngày tạo",
+    "noPresetsFound": "Không tìm thấy cấu hình nào",
+    "select": "Chọn",
+    "selected": "Đã chọn",
+    "delete": "Xóa",
+    "deleteWithFile": "Xóa cùng tập tin",
+    "deleteTaskOnly": "Chỉ xóa tác vụ",
+    "deleteTaskWithFile": "Xóa tác vụ cùng tập tin",
+    "deleteTaskWithFileConfirm": "Bạn có chắc chắn muốn xóa tác vụ và tập tin đã tải về không?",
+    "createdOn": "Tạo vào {date}",
+    "currencies": "{count} loại tiền",
+    "currenciesCount": "{count} loại tiền",
+    "createdDate": "Tạo: {date}",
+    "sortByLabel": "Sắp xếp theo:",
+    "selectPreset": "Chọn",
+    "deletePresetAction": "Xóa",
+    "deletePresetTitle": "Xóa Cấu Hình",
+    "deletePresetConfirm": "Bạn có chắc chắn muốn xóa cấu hình này không?",
+    "presetDeletedSuccess": "Đã xóa cấu hình",
+    "errorLabel": "Lỗi:",
+    "fetchTimeout": "Thời Gian Chờ Fetch",
+    "fetchTimeoutDesc": "Thiết lập thời gian chờ khi lấy tỷ giá (5-20 giây)",
+    "fetchTimeoutSeconds": "{seconds}s",
+    "fetchRetryIncomplete": "Thử lại khi chưa hoàn tất",
+    "fetchRetryIncompleteDesc": "Tự động thử lại các loại tiền bị lỗi/timeout trong quá trình fetch",
+    "fetchRetryTimes": "{times} lần thử",
+    "@fetchRetryTimes": {
+        "placeholders": {
+            "times": {
+                "type": "int"
+            }
+        }
+    },
+    "fetchingRates": "Đang Lấy Tỷ Giá",
+    "fetchingProgress": "Tiến độ: {completed}/{total}",
+    "timeRemaining": "Thời gian còn lại: {seconds}s",
+    "fetchingStatus": "Tình Trạng",
+    "fetchingCurrency": "Đang lấy {currency}...",
+    "fetchComplete": "Hoàn Thành",
+    "fetchCancelled": "Đã Hủy",
+    
+    "dateGenerator": "Tạo ngày ngẫu nhiên",
+    "dateGeneratorDesc": "Tạo ngày tháng ngẫu nhiên trong khoảng",
+    "startDate": "Ngày bắt đầu",
+    "endDate": "Ngày kết thúc",
+    "baseDate": "Ngày cơ sở",
+    "duration": "Thời lượng",
+    "dateCount": "Số lượng ngày",
+    
+    "timeGenerator": "Tạo giờ ngẫu nhiên",
+    "timeGeneratorDesc": "Tạo thời gian trong ngày ngẫu nhiên",
+    "startTime": "Giờ bắt đầu",
+    "endTime": "Giờ kết thúc",
+    "timeCount": "Số lượng giờ",
+    
+    "dateTimeGenerator": "Tạo ngày giờ ngẫu nhiên",
+    "dateTimeGeneratorDesc": "Tạo kết hợp ngày và giờ ngẫu nhiên",    
+    "heads": "Sấp",
+    "tails": "Ngửa",
+    "rock": "Búa",
+    "paper": "Bao", 
+    "scissors": "Kéo",    
+    "randomResult": "Kết quả",
+    "skipAnimation": "Bỏ qua hoạt ảnh",
+    "skipAnimationDesc": "Hiển thị kết quả ngay lập tức mà không có hiệu ứng hình ảnh",
+    "latinLetterGenerationError": "Không thể tạo {count} chữ cái duy nhất từ bộ có sẵn. Vui lòng giảm số lượng hoặc cho phép trùng lặp.",
+    "quickActions": "Tác vụ nhanh",
+    "quickActionsDesc": "Tùy chỉnh các phím tắt xuất hiện khi bạn nhấn giữ biểu tượng ứng dụng.",
+    "edit": "Sửa",
+    "cacheDetails": "Chi tiết bộ nhớ đệm",
+    "viewCacheDetails": "Xem chi tiết",
+    "cacheSize": "Kích thước bộ nhớ đệm",
+    "cacheItems": "Mục",
+    "clearAllCache": "Xóa tất cả bộ nhớ đệm",
+    "settingsStorage": "Kho lưu trữ cài đặt",
+    "clearSettingsStorage": "Xóa kho lưu trữ cài đặt",
+    "settingsStorageDetails": "Kho lưu trữ cài đặt và tùy chọn",
+    "viewSettingsStorageDetails": "Xem chi tiết kho lưu trữ cài đặt",
+    "settingsStorageSize": "Kích thước kho lưu trữ cài đặt",
+    "settingsStorageItems": "Mục cài đặt",
+    "clearAllSettingsStorage": "Xóa tất cả kho lưu trữ cài đặt",
+    "confirmClearCache": "Bạn có chắc chắn muốn xóa bộ nhớ đệm \"{cacheName}\"?",
+    "confirmClearAllCache": "Bạn có chắc chắn muốn xóa TẤT CẢ dữ liệu trong bộ nhớ đệm không? Thao tác này sẽ xóa tất cả các mẫu đã lưu nhưng vẫn giữ lại cài đặt của bạn.",
+    "cannotClearFollowingCaches": "Không thể xóa các bộ nhớ đệm sau vì chúng đang được sử dụng:",
+    "cacheCleared": "Đã xóa thành công bộ nhớ đệm {cacheName}",
+    "allCacheCleared": "Đã xóa tất cả bộ nhớ đệm thành công",
+    "errorClearingCache": "Lỗi khi xóa bộ nhớ đệm: {error}",
+    "cacheTypeTextTemplates": "Mẫu văn bản",
+    "cacheTypeTextTemplatesDesc": "Các mẫu văn bản và nội dung đã lưu",
+    "cacheTypeAppSettings": "Cài đặt ứng dụng",
+    "cacheTypeAppSettingsDesc": "Giao diện, ngôn ngữ và tùy chọn người dùng",    
+    "cacheTypeRandomGenerators": "Trình tạo ngẫu nhiên",
+    "cacheTypeRandomGeneratorsDesc": "Lịch sử tạo và cài đặt",    "saveGenerationHistory": "Ghi nhớ lịch sử tạo",
+    "saveGenerationHistoryDesc": "Ghi nhớ và hiển thị lịch sử các mục đã tạo",
+    "generationHistory": "Lịch sử tạo",
+    "generatedAt": "Tạo lúc",
+    "noHistoryYet": "Chưa có lịch sử",
+    "noHistoryMessage": "Tạo một số kết quả ngẫu nhiên để xem chúng ở đây",
+    "clearHistory": "Xóa lịch sử",
+    "calculationHistory": "Lịch sử tính toán",
+    "noCalculationHistory": "Chưa có lịch sử tính toán",
+    "saveCalculationHistory": "Ghi nhớ lịch sử tính toán",
+    "saveCalculationHistoryDesc": "Ghi nhớ và hiển thị lịch sử các phép tính",
+    "typeConfirmToProceed": "Nhập \"confirm\" để tiếp tục:",
+    "toolsShortcuts": "Công cụ & Phím tắt",
+    "displayArrangeTools": "Hiển thị và sắp xếp công cụ",
+    "displayArrangeToolsDesc": "Điều khiển công cụ nào hiển thị và thứ tự của chúng",
+    "manageToolVisibility": "Quản lý Hiển thị và Thứ tự Công cụ",
+    "dragToReorder": "Kéo để sắp xếp lại công cụ",
+    "allToolsHidden": "Tất cả công cụ đã ẩn",
+    "allToolsHiddenDesc": "Vui lòng bật ít nhất một công cụ để tiếp tục sử dụng ứng dụng",
+    "enableAtLeastOneTool": "Vui lòng bật ít nhất một công cụ.",
+    "toolVisibilityChanged": "Thứ tự và hiển thị công cụ đã được cập nhật.",
+    "errorMinOneTool": "Phải có ít nhất một công cụ được hiển thị.",
+    "quickActions": "Tác vụ nhanh",
+    "manageQuickActions": "Quản lý tác vụ nhanh",
+    "resetToDefault": "Đặt lại mặc định",    
+    "resetToDefaultsConfirm": "Bạn có chắc chắn muốn đặt lại tất cả cài đặt về mặc định không?",
+    "manageQuickActions": "Quản lý Thao tác nhanh",
+    "manageQuickActionsDesc": "Cấu hình phím tắt để truy cập nhanh các công cụ",
+    "quickActionsDialogTitle": "Thao tác nhanh",
+    "quickActionsDialogDesc": "Chọn tối đa 4 công cụ để truy cập nhanh qua biểu tượng ứng dụng hoặc thanh tác vụ",
+    "quickActionsLimit": "Tối đa 4 thao tác nhanh được phép",
+    "quickActionsLimitReached": "Bạn chỉ có thể chọn tối đa 4 công cụ cho thao tác nhanh",
+    "clearAllQuickActions": "Xóa tất cả",
+    "quickActionsCleared": "Đã xóa thao tác nhanh",
+    "quickActionsUpdated": "Đã cập nhật thao tác nhanh",
+    "quickActionsInfo": "Thao tác nhanh",
+    "selectUpTo4Tools": "Chọn tối đa 4 công cụ để truy cập nhanh.",
+    "quickActionsEnableDesc": "Thao tác nhanh sẽ xuất hiện khi bạn nhấn giữ biểu tượng ứng dụng trên Android hoặc nhấp chuột phải vào biểu tượng thanh tác vụ trên Windows.",
+    "quickActionsEnableDescMobile": "Thao tác nhanh sẽ xuất hiện khi bạn nhấn giữ biểu tượng ứng dụng (chỉ Android/iOS).",
+    "selectedCount": "Đã chọn: {current} trong {max}",
+    "@selectedCount": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "max": {
+                "type": "int"
+            }
+        }
+    },    "maxQuickActionsReached": "Đã đạt tối đa 4 thao tác nhanh",
+    "clearAll": "Xóa tất cả",
+    
+    "converterTools": "Công cụ chuyển đổi",
+    "converterToolsDesc": "Chuyển đổi giữa các đơn vị và hệ thống khác nhau",
+    "lengthConverter": "Chuyển đổi Chiều dài",
+    "weightConverter": "Chuyển đổi Trọng lượng",
+    "@weightConverter": {
+        "description": "Tiêu đề cho công cụ chuyển đổi trọng lượng"
+    },
+    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
+    "@weightConverterInfo": {
+        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi trọng lượng"
+    },
+    "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
+    "@customizeWeightUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị trọng lượng"
+    },
+    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
+    "@weightConverterDesc": {
+        "description": "Mô tả cho công cụ chuyển đổi trọng lượng"
+    },
+    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
+    "@customizeMassUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
+    },
+    "massConverter": "Chuyển đổi Khối lượng",
+    "@massConverter": {
+        "description": "Tiêu đề cho công cụ chuyển đổi khối lượng"
+    },
+    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
+    "@massConverterInfo": {
+        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi khối lượng"
+    },
+    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
+    "@massConverterDesc": {
+        "description": "Mô tả cho công cụ chuyển đổi khối lượng"
+    },
+    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
+    "@customizeMassUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
+    },
+    "temperatureConverter": "Chuyển đổi Nhiệt độ",
+    "volumeConverter": "Chuyển đổi Thể tích",
+    "areaConverter": "Chuyển đổi Diện tích",
+    "speedConverter": "Chuyển đổi Tốc độ",
+    "timeConverter": "Chuyển đổi Thời gian",
+    "dataConverter": "Chuyển đổi Dung lượng",
+    "numberSystemConverter": "Chuyển đổi Hệ số",    
+    
+    "calculatorTools": "Công cụ tính toán",
+    "calculatorToolsDesc": "Các máy tính chuyên dụng cho sức khỏe, tài chính và hơn thế nữa",
+
+        "lengthConverter": "Chuyển đổi Chiều dài",
+    "weightConverter": "Chuyển đổi Trọng lượng",
+    "@weightConverter": {
+        "description": "Tiêu đề cho công cụ chuyển đổi trọng lượng"
+    },
+    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
+    "@weightConverterInfo": {
+        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi trọng lượng"
+    },
+    "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
+    "@customizeWeightUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị trọng lượng"
+    },
+    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
+    "@weightConverterDesc": {
+        "description": "Mô tả cho công cụ chuyển đổi trọng lượng"
+    },
+    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
+    "@customizeMassUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
+    },
+    "massConverter": "Chuyển đổi Khối lượng",
+    "@massConverter": {
+        "description": "Tiêu đề cho công cụ chuyển đổi khối lượng"
+    },
+    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
+    "@massConverterInfo": {
+        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi khối lượng"
+    },
+    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
+    "@massConverterDesc": {
+        "description": "Mô tả cho công cụ chuyển đổi khối lượng"
+    },
+    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
+    "@customizeMassUnits": {
+        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
+    },
+    "temperatureConverter": "Chuyển đổi Nhiệt độ",
+    "volumeConverter": "Chuyển đổi Thể tích",
+    "areaConverter": "Chuyển đổi Diện tích",
+    "speedConverter": "Chuyển đổi Tốc độ",
+    "timeConverter": "Chuyển đổi Thời gian",
+    "dataConverter": "Chuyển đổi Dung lượng",
+    "numberSystemConverter": "Chuyển đổi Hệ số",
+
+    "massConverter": "Chuyển đổi Khối lượng",
+    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
+    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
+
+    "weightConverter": "Chuyển đổi Trọng lượng",
+    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
+    "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
+    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
+
+    "saveConverterToolsState": "Lưu Trạng Thái Công Cụ Chuyển Đổi",
+    "saveConverterToolsStateDesc": "Tự động lưu cài đặt và tùy chọn của công cụ chuyển đổi",
+
+    "dragging": "Kéo...",
+    "edit": "Chỉnh sửa",
+    "customizeUnits": "Tùy chỉnh Đơn vị",
+    "cardName": "Tên Thẻ",
+    "cardNameHint": "Nhập tên thẻ (tối đa 20 ký tự)",
+    "converterCardNameDefault": "Thẻ {position}",
+    "unitSelectedStatus": "Đã chọn {count} trong số {max}",
+    "unitVisibleStatus": "{count} đơn vị hiển thị",
+    "moveDown": "Di chuyển Xuống",
+    "moveUp": "Di chuyển Lên",
+    "moveToFirst": "Di chuyển đến Đầu",
+    "moveToLast": "Di chuyển đến Cuối",
+    "cardActions": "Hành Động Thẻ",
+    "viewDataStatus": "Xem trạng thái dữ liệu",
+    "tableWith": "Bảng {count} thẻ",
+    "@tableWith": {
+      "placeholders": {
+        "count": {
+          "type": "int"
+        }
+      }
+    },
+    "enterValue": "Nhập giá trị",
+    "fromUnit": "Đơn vị gốc",
+    "tables": "Bảng",
+    "tableView": "Chế độ xem bảng",
+    "listView": "Chế độ xem danh sách",
+    "customizeUnits": "Tùy chỉnh Đơn vị",
+    "visibleUnits": "Đơn vị hiển thị",
+    "selectUnitsToShow": "Chọn đơn vị để hiển thị",
+    "enterValue": "Nhập giá trị",
+    "conversionResults": "Kết quả chuyển đổi",
+    "unit": "Đơn vị",
+    "showAll": "Hiển thị tất cả",
+    "apply": "Áp dụng",
+    "enableFocusMode": "Bật chế độ tập trung",
+    "disableFocusMode": "Tắt chế độ tập trung",
+    "noUnitsSelected": "Chưa chọn đơn vị nào",
+    "maximumSelectionExceeded": "Vượt quá số lượng tối đa",
+    "presetSaved": "Preset đã được lưu thành công",
+    "errorSavingPreset": "Lỗi khi lưu preset: {error}",
+    "@errorSavingPreset": {
+      "placeholders": {
+        "error": {
+          "type": "String"
+        }
+      }
+    },
+    "errorLoadingPresets": "Lỗi khi tải presets: {error}",
+    "@errorLoadingPresets": {
+      "placeholders": {
+        "error": {
+          "type": "String"
+        }
+      }
+    },
+    "maximumSelectionReached": "Đã đạt giới hạn lựa chọn tối đa",
+    "minimumSelectionRequired": "Cần tối thiểu {count} lựa chọn",
+    "@minimumSelectionRequired": {
+      "placeholders": {
+        "count": {
+          "type": "int"
+        }
+      }
+    },
+    "renamePreset": "Đổi tên Preset",
+    "rename": "Đổi tên",
+    "presetRenamedSuccessfully": "Preset đã được đổi tên thành công",
+    "chooseFromSavedPresets": "Chọn từ các preset đã lưu",
+
+    "searchHint": "Tìm kiếm...",
+    "select": "Chọn",
+
+    "focusModeEnabledMessage": "Đã kích hoạt chế độ tập trung. {exitInstruction}",
+    "@focusModeEnabledMessage": {
+      "placeholders": {
+        "exitInstruction": {
+          "type": "String"
+        }
+      }
+    },
+    "focusModeDisabledMessage": "Đã tắt chế độ tập trung. Tất cả thành phần giao diện hiện đã hiển thị.",
+    "exitFocusModeDesktop": "Nhấn biểu tượng tập trung trên thanh ứng dụng để thoát",
+    "exitFocusModeMobile": "Zoom out hoặc nhấn biểu tượng tập trung để thoát",
+    "zoomToEnterFocusMode": "Zoom in để vào chế độ tập trung",
+    "zoomToExitFocusMode": "Zoom out để thoát chế độ tập trung",
+    "focusModeGesture": "Sử dụng cử chỉ zoom để bật/tắt chế độ tập trung",
+    "focusModeButton": "Sử dụng nút tập trung để bật/tắt chế độ tập trung",
+    "focusModeHidesElements": "Chế độ tập trung ẩn widget trạng thái, nút thêm, nút chuyển chế độ xem và thống kê",
+
+    "converterSettings": "Cài đặt Chuyển đổi",
+    "converterSettingsDesc": "Cấu hình thời gian chờ, số lần thử lại và lưu trạng thái",
+    "converterToolsSettings": "Cài đặt Công cụ Chuyển đổi"
+}
