@@ -9,6 +9,7 @@ import 'package:unit_converters/models/converter_models/converter_base.dart'
 import 'package:unit_converters/services/app_logger.dart';
 import 'package:unit_converters/services/focus_mode_service.dart'
     show FocusModeService;
+import 'package:unit_converters/utils/variables_utils.dart';
 import 'package:unit_converters/widgets/converter_tools/generic_unit_custom_dialog.dart'
     show GenericUnitItem, EnhancedGenericUnitCustomizationDialog;
 import 'package:unit_converters/widgets/generic/icon_button_list.dart'
@@ -67,9 +68,14 @@ class _GenericConverterViewState extends State<GenericConverterView> {
     final l10n = AppLocalizations.of(context)!;
     final screenSize = MediaQuery.of(context).size;
 
-    int visibleCount = ((screenSize.width - 340) ~/ 40).clamp(0, 4);
+    int visibleCount = isDesktopContext(context) ? 4 : 1;
 
     List<IconButtonListItem> actionItems = [
+      IconButtonListItem(
+        icon: Icons.tune,
+        label: l10n.customizeUnits,
+        onPressed: () => _showGlobalUnitsCustomization(context, controller),
+      ),
       IconButtonListItem(
         icon: controller.isFocusMode
             ? Icons.center_focus_weak
@@ -78,11 +84,6 @@ class _GenericConverterViewState extends State<GenericConverterView> {
             ? l10n.disableFocusMode
             : l10n.enableFocusMode,
         onPressed: () => _toggleFocusMode(context, controller),
-      ),
-      IconButtonListItem(
-        icon: Icons.tune,
-        label: l10n.customizeUnits,
-        onPressed: () => _showGlobalUnitsCustomization(context, controller),
       ),
       IconButtonListItem(
         icon: Icons.restart_alt,

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:unit_converters/controllers/converter_controller.dart';
 import 'package:unit_converters/models/converter_models/converter_base.dart';
 import 'package:unit_converters/l10n/app_localizations.dart';
+import 'package:unit_converters/utils/snackbar_utils.dart';
 import 'package:unit_converters/utils/variables_utils.dart';
 import 'generic_unit_custom_dialog.dart';
 
@@ -834,12 +835,10 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
     Clipboard.setData(ClipboardData(text: value));
 
     final l10n = AppLocalizations.of(context)!;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${l10n.copied} $unitName: $value'),
-        duration: const Duration(seconds: 2),
-        behavior: SnackBarBehavior.floating,
-      ),
+    SnackBarUtils.showTyped(
+      context,
+      '${l10n.copied} $unitName: $value',
+      SnackBarType.info,
     );
   }
 

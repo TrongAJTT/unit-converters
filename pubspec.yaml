@@ -1,7 +1,7 @@
 name: unit_converters
 description: "Fast and convenient converter tools with multiple units."
 publish_to: 'none'
-version: 0.9.0
+version: 0.9.5
 
 environment:
   sdk: ^3.8.1

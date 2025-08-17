@@ -25,6 +25,8 @@ import 'screens/converter_tools_screen.dart';
 import 'screens/converter_tools_desktop_layout.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 // Global navigation key for deep linking
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -162,30 +164,58 @@ class SettingsController extends ChangeNotifier {
 
   // Load settings from SharedPreferences
   Future<void> loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
+    try {
+      // Print the directory of SharedPreferences (for debugging)
+      if (!kIsWeb) {
+        // Only available on mobile/desktop, not web
+        // SharedPreferences stores data in a file, but does not expose the path directly.
+        // However, we can print the app's document directory.
 
-    // Load theme mode
-    final themeIndex = prefs.getInt('themeMode') ?? 0;
-    _themeMode = ThemeMode.values[themeIndex];
+        final dir = await getApplicationDocumentsDirectory();
+        print('SharedPreferences directory: ${dir.path}');
+      }
 
-    // Load language
-    final languageCode = prefs.getString('language') ?? 'en';
-    _locale = Locale(languageCode);
+      final prefs = await SharedPreferences.getInstance();
 
-    notifyListeners();
+      // Load theme mode
+      final themeIndex = prefs.getInt('themeMode') ?? 0;
+      _themeMode = ThemeMode.values[themeIndex];
+
+      // Load language
+      final languageCode = prefs.getString('language') ?? 'en';
+      _locale = Locale(languageCode);
+
+      notifyListeners();
+    } catch (e) {
+      // Handle corrupted SharedPreferences data
+      print('SettingsController: Error loading settings, using defaults: $e');
+
+      // Use default values and continue
+      _themeMode = ThemeMode.system;
+      _locale = const Locale('en');
+      notifyListeners();
+    }
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
     _themeMode = mode;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('themeMode', mode.index);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setInt('themeMode', mode.index);
+    } catch (e) {
+      print('SettingsController: Error saving theme mode: $e');
+    }
     notifyListeners();
   }
 
   Future<void> setLocale(Locale locale) async {
     _locale = locale;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('language', locale.languageCode);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('language', locale.languageCode);
+    } catch (e) {
+      print('SettingsController: Error saving locale: $e');
+    }
     notifyListeners();
   }
 }
