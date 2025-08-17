@@ -91,7 +91,7 @@ class ToolItem {
   final String subtitle;
   final IconData icon;
   final Color color;
-  final Widget Function(bool isEmbedded) screenBuilder;
+  final Widget Function() screenBuilder;
 
   const ToolItem({
     required this.id,
@@ -109,7 +109,7 @@ class ToolItem {
     String? subtitle,
     IconData? icon,
     Color? color,
-    Widget Function(bool isEmbedded)? screenBuilder,
+    Widget Function()? screenBuilder,
   }) {
     return ToolItem(
       id: id ?? this.id,

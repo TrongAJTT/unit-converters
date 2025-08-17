@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:unit_converters/l10n/app_localizations.dart';
 import 'package:unit_converters/services/converter_tools_manager.dart';
 import 'package:unit_converters/services/tool_order_service.dart';
 
@@ -34,8 +33,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
   }
 
   Future<void> _loadTools() async {
-    final loc = AppLocalizations.of(context)!;
-    final tools = await ConverterToolsManager.getOrderedTools(loc);
+    final tools = await ConverterToolsManager.getOrderedTools(context);
 
     if (mounted) {
       setState(() {
@@ -148,12 +146,12 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       _tools,
     );
     if (selectedTool != null) {
-      return selectedTool.screenBuilder(true);
+      return selectedTool.screenBuilder();
     }
 
     // Fallback if no tool is found
     if (_tools.isNotEmpty) {
-      return _tools.first.screenBuilder(true);
+      return _tools.first.screenBuilder();
     }
 
     return const Center(child: Text('No tools available'));

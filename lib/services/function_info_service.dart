@@ -72,33 +72,20 @@ class FunctionInfo {
 class FunctionInfoKeys {
   static const String p2lanDataTransfer = 'p2lanDataTransfer';
 
-  static const String currencyConverter = 'converter_tools/currencyConverter';
-  static const String lengthConverter = 'converter_tools/lengthConverter';
-  static const String weightConverter = 'converter_tools/weightConverter';
-  static const String temperatureConverter =
-      'converter_tools/temperatureConverter';
-  static const String massConverter = 'converter_tools/massConverter';
-  static const String speedConverter = 'converter_tools/speedConverter';
-  static const String areaConverter = 'converter_tools/areaConverter';
-  static const String volumeConverter = 'converter_tools/volumeConverter';
-  static const String timeConverter = 'converter_tools/timeConverter';
-  static const String powerConverter = 'converter_tools/powerConverter';
-  static const String energyConverter = 'converter_tools/energyConverter';
-  static const String pressureConverter = 'converter_tools/pressureConverter';
-  static const String dataConverter = 'converter_tools/dataConverter';
-  static const String angleConverter = 'converter_tools/angleConverter';
-  static const String frequencyConverter = 'converter_tools/frequencyConverter';
-  static const String numberSystemConverter =
-      'converter_tools/numberSystemConverter';
-
-  static const String scientificCalculator =
-      'calculator_tools/scientificCalculator';
-  static const String graphingCalculator =
-      'calculator_tools/graphingCalculator';
-  static const String bmiCalculator = 'calculator_tools/bmiCalculator';
-  static const String financialCalculator =
-      'calculator_tools/financialCalculator';
-  static const String dateCalculator = 'calculator_tools/dateCalculator';
-  static const String discountCalculator =
-      'calculator_tools/discountCalculator';
+  static const String currencyConverter = 'currencyConverter';
+  static const String lengthConverter = 'lengthConverter';
+  static const String weightConverter = 'weightConverter';
+  static const String temperatureConverter = 'temperatureConverter';
+  static const String massConverter = 'massConverter';
+  static const String speedConverter = 'speedConverter';
+  static const String areaConverter = 'areaConverter';
+  static const String volumeConverter = 'volumeConverter';
+  static const String timeConverter = 'timeConverter';
+  static const String powerConverter = 'powerConverter';
+  static const String energyConverter = 'energyConverter';
+  static const String pressureConverter = 'pressureConverter';
+  static const String dataConverter = 'dataConverter';
+  static const String angleConverter = 'angleConverter';
+  static const String frequencyConverter = 'frequencyConverter';
+  static const String numberSystemConverter = 'numberSystemConverter';
 }

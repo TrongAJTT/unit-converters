@@ -16,8 +16,8 @@ class ConverterToolsScreen extends StatelessWidget {
     this.onToolSelected,
   });
 
-  Future<List<SectionItem>> _buildSections(AppLocalizations loc) async {
-    final tools = await ConverterToolsManager.getOrderedTools(loc);
+  Future<List<SectionItem>> _buildSections(BuildContext ctx) async {
+    final tools = await ConverterToolsManager.getOrderedTools(ctx);
     return ConverterToolsManager.toolsToSectionItems(tools);
   }
 
@@ -41,10 +41,7 @@ class ConverterToolsScreen extends StatelessWidget {
       // Mobile mode: navigation stack bình thường
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => Scaffold(
-            appBar: AppBar(title: Text(section.title)),
-            body: section.content,
-          ),
+          builder: (context) => Scaffold(body: section.content),
         ),
       );
     }
@@ -57,7 +54,7 @@ class ConverterToolsScreen extends StatelessWidget {
     final isDesktop = width > 800;
 
     return FutureBuilder<List<SectionItem>>(
-      future: _buildSections(loc),
+      future: _buildSections(context),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());

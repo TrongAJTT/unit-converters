@@ -603,7 +603,11 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
                 _debouncedOnChanged(cardIndex, newUnitId, currentText);
               } else {
                 // Fallback to using the stored base value
-                _debouncedOnChanged(cardIndex, newUnitId, card.baseValue.toString());
+                _debouncedOnChanged(
+                  cardIndex,
+                  newUnitId,
+                  card.baseValue.toString(),
+                );
               }
             }
           },

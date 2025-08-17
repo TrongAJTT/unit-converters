@@ -25,6 +25,9 @@ class SettingsModel extends HiveObject {
   @HiveField(6)
   final bool compactTabLayout;
 
+  @HiveField(7)
+  final int decimalPlaces;
+
   SettingsModel({
     this.fetchTimeoutSeconds = 10,
     this.featureStateSavingEnabled = true, // Always enabled by default
@@ -33,6 +36,7 @@ class SettingsModel extends HiveObject {
     this.focusModeEnabled = false,
     this.saveRandomToolsState = true,
     this.compactTabLayout = false, // Default to false
+    this.decimalPlaces = 4, // Default to 4 decimal places
   });
 
   SettingsModel copyWith({
@@ -43,6 +47,7 @@ class SettingsModel extends HiveObject {
     bool? focusModeEnabled,
     bool? saveRandomToolsState,
     bool? compactTabLayout,
+    int? decimalPlaces,
   }) {
     return SettingsModel(
       fetchTimeoutSeconds: fetchTimeoutSeconds ?? this.fetchTimeoutSeconds,
@@ -53,6 +58,7 @@ class SettingsModel extends HiveObject {
       focusModeEnabled: focusModeEnabled ?? this.focusModeEnabled,
       saveRandomToolsState: saveRandomToolsState ?? this.saveRandomToolsState,
       compactTabLayout: compactTabLayout ?? this.compactTabLayout,
+      decimalPlaces: decimalPlaces ?? this.decimalPlaces,
     );
   }
 
@@ -65,6 +71,7 @@ class SettingsModel extends HiveObject {
       'focusModeEnabled': focusModeEnabled,
       'saveRandomToolsState': saveRandomToolsState,
       'compactTabLayout': compactTabLayout,
+      'decimalPlaces': decimalPlaces,
     };
   }
 
@@ -77,6 +84,7 @@ class SettingsModel extends HiveObject {
       focusModeEnabled: json['focusModeEnabled'] ?? false,
       saveRandomToolsState: json['saveRandomToolsState'] ?? true,
       compactTabLayout: json['compactTabLayout'] ?? false,
+      decimalPlaces: json['decimalPlaces'] ?? 4,
     );
   }
 }

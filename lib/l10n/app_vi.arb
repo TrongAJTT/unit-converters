@@ -467,6 +467,24 @@
   "reloadTools": "Tải lại công cụ",
   "compactTabLayout": "Bố cục tab thu gọn",
   "compactTabLayoutDesc": "Ẩn biểu tượng trong tab để có giao diện gọn hơn",
+  "decimalPlaces": "Số chữ số thập phân",
+  "@decimalPlaces": {
+    "description": "Tùy chọn cài đặt số chữ số thập phân"
+  },
+  "decimalPlacesDesc": "Số chữ số thập phân hiển thị trong kết quả chuyển đổi (1-6)",
+  "@decimalPlacesDesc": {
+    "description": "Mô tả cho cài đặt số chữ số thập phân"
+  },
+  "decimalPlacesCount": "{count} chữ số",
+  "@decimalPlacesCount": {
+    "description": "Nhãn cho số chữ số thập phân",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
   "letterCountRange": "Khoảng số lượng chữ cái",
   "numberRangeFromTo": "Khoảng giá trị: Từ {from} đến {to}",
   "@numberRangeFromTo": {

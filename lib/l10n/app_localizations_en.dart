@@ -1038,6 +1038,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get compactTabLayoutDesc => 'Hide icons in tabs for a more compact look';
 
   @override
+  String get decimalPlaces => 'Decimal Places';
+
+  @override
+  String get decimalPlacesDesc => 'Number of decimal places shown in conversion results (1-6)';
+
+  @override
+  String decimalPlacesCount(int count) {
+    return '$count digits';
+  }
+
+  @override
   String get letterCountRange => 'Letter Count Range';
 
   @override
@@ -1905,4 +1916,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get converterToolsSettings => 'Converter Tools Settings';
+}
+
+/// The translations for English (`en_clean`).
+class AppLocalizationsEnClean extends AppLocalizationsEn {
+  AppLocalizationsEnClean(): super('en_clean');
+
+
 }

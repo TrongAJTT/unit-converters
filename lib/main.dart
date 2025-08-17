@@ -13,6 +13,7 @@ import 'package:unit_converters/services/hive_service.dart';
 import 'package:unit_converters/services/settings_service.dart';
 import 'package:unit_converters/services/app_logger.dart';
 import 'package:unit_converters/services/security_manager.dart';
+import 'package:unit_converters/services/number_format_service.dart';
 import 'package:unit_converters/services/converter_services/converter_tools_data_service.dart';
 import 'package:unit_converters/models/random_models/random_state_models.dart';
 import 'package:unit_converters/models/settings_model.dart';
@@ -90,6 +91,9 @@ Future<void> main() async {
 
   // Initialize settings controller and load saved settings
   await settingsController.loadSettings();
+
+  // Initialize NumberFormatService with current locale and decimal places
+  await NumberFormatService.initialize(settingsController.locale);
 
   runApp(const MainApp());
 }

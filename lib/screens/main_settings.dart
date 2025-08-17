@@ -3,6 +3,7 @@ import 'package:unit_converters/l10n/app_localizations.dart';
 import 'package:unit_converters/utils/widget_layout_decor_utils.dart';
 import 'package:unit_converters/services/cache_service.dart';
 import 'package:unit_converters/services/settings_service.dart';
+import 'package:unit_converters/services/number_format_service.dart';
 
 import 'package:unit_converters/layouts/section_sidebar_scrolling_layout.dart';
 import 'package:unit_converters/widgets/generic/section_item.dart';
@@ -10,11 +11,12 @@ import 'package:unit_converters/widgets/generic/option_grid_picker.dart'
     as grid;
 import 'package:unit_converters/widgets/generic/option_item.dart';
 import 'package:unit_converters/widgets/generic/option_switch.dart';
+import 'package:unit_converters/widgets/generic/option_slider.dart'
+    show SliderOption, OptionSlider, OptionSliderLayout;
 import 'package:unit_converters/widgets/security/security_settings_widget.dart';
 import 'package:unit_converters/widgets/generic/generic_settings_helper.dart';
 import 'package:unit_converters/screens/tool_ordering_screen.dart';
 import 'package:unit_converters/services/tool_order_service.dart';
-import 'package:unit_converters/screens/converter_tools_settings_layout.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unit_converters/main.dart';
 
@@ -38,8 +40,9 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
   late ThemeMode _themeMode = settingsController.themeMode;
   late String _language = settingsController.locale.languageCode;
   bool _loading = true;
-  bool _saveRandomToolsState = true;
   bool _compactTabLayout = false;
+  int _decimalPlaces = 4;
+  bool _saveConverterToolsState = true;
 
   // Static decorator for settings
   late final OptionSwitchDecorator switchDecorator;
@@ -64,9 +67,10 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     final themeIndex = prefs.getInt('themeMode');
     final lang = prefs.getString('language');
-    final saveRandomToolsState =
-        await SettingsService.getSaveRandomToolsState();
     final compactTabLayout = await SettingsService.getCompactTabLayout();
+    final decimalPlaces = await SettingsService.getDecimalPlaces();
+    final saveConverterToolsState =
+        await SettingsService.getFeatureStateSaving();
 
     setState(() {
       _themeMode = themeIndex != null
@@ -74,8 +78,10 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
           : settingsController.themeMode;
       _language = lang ?? settingsController.locale.languageCode;
       // _logRetentionDays = logRetentionDays;
-      _saveRandomToolsState = saveRandomToolsState;
       _compactTabLayout = compactTabLayout;
+      _decimalPlaces = decimalPlaces;
+      _saveConverterToolsState = saveConverterToolsState;
+      _saveConverterToolsState = saveConverterToolsState;
 
       _loading = false;
     });
@@ -106,14 +112,21 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     }
   }
 
-  void _onSaveRandomToolsStateChanged(bool enabled) async {
-    setState(() => _saveRandomToolsState = enabled);
-    await SettingsService.updateSaveRandomToolsState(enabled);
-  }
-
   void _onCompactTabLayoutChanged(bool enabled) async {
     setState(() => _compactTabLayout = enabled);
     await SettingsService.updateCompactTabLayout(enabled);
+  }
+
+  void _onDecimalPlacesChanged(int places) async {
+    setState(() => _decimalPlaces = places);
+    await SettingsService.updateDecimalPlaces(places);
+    // Update the NumberFormatService with new decimal places
+    NumberFormatService.updateDecimalPlaces(places);
+  }
+
+  void _onSaveConverterToolsStateChanged(bool enabled) async {
+    setState(() => _saveConverterToolsState = enabled);
+    await SettingsService.updateFeatureStateSaving(enabled);
   }
 
   @override
@@ -175,14 +188,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
         content: _buildConverterToolsSection(loc),
       ),
       SectionItem(
-        id: 'random_tools',
-        title: loc.randomTools,
-        subtitle: loc.randomToolsDesc,
-        icon: Icons.casino,
-        iconColor: Colors.purple,
-        content: _buildRandomToolsSection(loc),
-      ),
-      SectionItem(
         id: 'data_management',
         title: loc.dataManager,
         subtitle: loc.dataManagerDesc,
@@ -226,22 +231,43 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildConverterToolsSettings(loc),
+        _buildSaveConverterToolsStateSettings(loc),
+        const SizedBox(height: 24),
+        _buildDecimalPlacesSettings(loc),
         VerticalSpacingDivider.both(6),
         _buildToolOrderingSettings(loc),
       ],
     );
   }
 
-  Widget _buildRandomToolsSection(AppLocalizations loc) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildSaveRandomToolsStateSettings(loc),
-        VerticalSpacingDivider.both(6),
-        _buildToolOrderingSettings(loc),
-      ],
-    );
+  Future<void> _showToolOrderingScreen(AppLocalizations loc) async {
+    // Check the current custom order status
+    final hadCustomOrderBefore = await ToolOrderService.isCustomOrder();
+
+    // Show the tool ordering screen
+    if (mounted) {
+      GenericSettingsHelper.showSettings(
+        context,
+        GenericSettingsConfig(
+          title: loc.arrangeTools,
+          settingsLayout: const ToolOrderingScreen(isEmbedded: true),
+          onSettingsChanged: (newSettings) {
+            // Empty lambda as requested
+          },
+        ),
+      );
+    }
+
+    // Check if order changed after the screen closes
+    // Note: This is a simplified approach - in a real app you might want
+    // to use a more sophisticated state management solution
+    Future.delayed(const Duration(milliseconds: 500), () async {
+      final hasCustomOrderAfter = await ToolOrderService.isCustomOrder();
+      if (hadCustomOrderBefore != hasCustomOrderAfter &&
+          widget.onToolVisibilityChanged != null) {
+        widget.onToolVisibilityChanged!();
+      }
+    });
   }
 
   Widget _buildDataSection(AppLocalizations loc) {
@@ -251,8 +277,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
         SecuritySettingsWidget(loc: loc),
         const SizedBox(height: 24),
         _buildCacheManagement(loc),
-        // const SizedBox(height: 24),
-        // _buildExpandableLogSection(loc),
       ],
     );
   }
@@ -315,16 +339,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     );
   }
 
-  Widget _buildSaveRandomToolsStateSettings(AppLocalizations loc) {
-    return OptionSwitch(
-      title: loc.saveRandomToolsState,
-      subtitle: loc.saveRandomToolsStateDesc,
-      value: _saveRandomToolsState,
-      onChanged: _onSaveRandomToolsStateChanged,
-      decorator: switchDecorator,
-    );
-  }
-
   Widget _buildCompactTabLayoutSettings(AppLocalizations loc) {
     return OptionSwitch(
       title: loc.compactTabLayout,
@@ -335,28 +349,29 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     );
   }
 
-  Widget _buildConverterToolsSettings(AppLocalizations loc) {
-    return ListTile(
-      leading: Icon(Icons.tune, color: Theme.of(context).colorScheme.primary),
-      title: Text(
-        loc.converterSettings,
-        style: Theme.of(
-          context,
-        ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+  Widget _buildSaveConverterToolsStateSettings(AppLocalizations loc) {
+    return OptionSwitch(
+      title: loc.saveConverterToolsState,
+      subtitle: loc.saveConverterToolsStateDesc,
+      value: _saveConverterToolsState,
+      onChanged: _onSaveConverterToolsStateChanged,
+      decorator: switchDecorator,
+    );
+  }
+
+  Widget _buildDecimalPlacesSettings(AppLocalizations loc) {
+    return OptionSlider<int>(
+      label:
+          "Decimal Places", // Temporary hardcoded until localization is fixed
+      subtitle: "Number of decimal places shown in conversion results (1-6)",
+      icon: Icons.settings,
+      currentValue: _decimalPlaces,
+      options: List.generate(
+        6, // Support 1-6 decimal places
+        (i) => SliderOption(value: i + 1, label: "${i + 1} digits"),
       ),
-      subtitle: Text(
-        loc.converterSettingsDesc,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-        color: Theme.of(context).colorScheme.onSurfaceVariant,
-      ),
-      onTap: () => _showConverterToolsSettings(loc),
-      contentPadding: EdgeInsets.zero,
+      onChanged: _onDecimalPlacesChanged,
+      layout: OptionSliderLayout.none,
     );
   }
 
@@ -386,52 +401,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
       onTap: () => _showToolOrderingScreen(loc),
       contentPadding: EdgeInsets.zero,
     );
-  }
-
-  Future<void> _showToolOrderingScreen(AppLocalizations loc) async {
-    // Check the current custom order status
-    final hadCustomOrderBefore = await ToolOrderService.isCustomOrder();
-
-    // Show the tool ordering screen
-    if (mounted) {
-      GenericSettingsHelper.showSettings(
-        context,
-        GenericSettingsConfig(
-          title: loc.arrangeTools,
-          settingsLayout: const ToolOrderingScreen(isEmbedded: true),
-          onSettingsChanged: (newSettings) {
-            // Empty lambda as requested
-          },
-        ),
-      );
-    }
-
-    // Check if order changed after the screen closes
-    // Note: This is a simplified approach - in a real app you might want
-    // to use a more sophisticated state management solution
-    Future.delayed(const Duration(milliseconds: 500), () async {
-      final hasCustomOrderAfter = await ToolOrderService.isCustomOrder();
-      if (hadCustomOrderBefore != hasCustomOrderAfter &&
-          widget.onToolVisibilityChanged != null) {
-        widget.onToolVisibilityChanged!();
-      }
-    });
-  }
-
-  Future<void> _showConverterToolsSettings(AppLocalizations loc) async {
-    // Show the converter tools settings screen
-    if (mounted) {
-      GenericSettingsHelper.showSettings(
-        context,
-        GenericSettingsConfig(
-          title: loc.converterToolsSettings,
-          settingsLayout: const ConverterToolsSettingsLayout(),
-          onSettingsChanged: (newSettings) {
-            // Handle settings change if needed
-          },
-        ),
-      );
-    }
   }
 
   Widget _buildCacheManagement(AppLocalizations loc) {

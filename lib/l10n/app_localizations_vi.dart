@@ -1038,6 +1038,17 @@ class AppLocalizationsVi extends AppLocalizations {
   String get compactTabLayoutDesc => 'Ẩn biểu tượng trong tab để có giao diện gọn hơn';
 
   @override
+  String get decimalPlaces => 'Số chữ số thập phân';
+
+  @override
+  String get decimalPlacesDesc => 'Số chữ số thập phân hiển thị trong kết quả chuyển đổi (1-6)';
+
+  @override
+  String decimalPlacesCount(int count) {
+    return '$count chữ số';
+  }
+
+  @override
   String get letterCountRange => 'Khoảng số lượng chữ cái';
 
   @override

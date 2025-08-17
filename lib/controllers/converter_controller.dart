@@ -4,6 +4,8 @@ import 'package:unit_converters/models/converter_models/converter_base.dart';
 import 'package:unit_converters/services/converter_services/converter_service_base.dart';
 import 'package:unit_converters/services/app_logger.dart';
 import 'package:unit_converters/services/number_format_service.dart';
+import 'package:unit_converters/services/settings_service.dart';
+import 'package:unit_converters/services/converter_services/converter_tools_data_service.dart';
 
 class ConverterController extends ChangeNotifier {
   final ConverterServiceBase _converterService;
@@ -112,33 +114,70 @@ class ConverterController extends ChangeNotifier {
         'ConverterController: Loading state for ${_converterService.converterType}',
       );
 
-      // TODO: Implement state loading
-      // // Check if feature state saving is enabled
-      // final settings = await ExtensibleSettingsService.getGlobalSettings();
-      // logInfo(
-      //   'ConverterController: Feature state saving enabled: ${settings.featureStateSavingEnabled}',
-      // );
+      // Check if feature state saving is enabled
+      final settings = await SettingsService.getSettings();
+      logInfo(
+        'ConverterController: Feature state saving enabled: ${settings.featureStateSavingEnabled}',
+      );
 
-      // if (settings.featureStateSavingEnabled) {
-      //   // Load saved state when state saving is enabled
-      //   final loadedState = await _stateService.loadState(
-      //     _converterService.converterType,
-      //   );
+      if (settings.featureStateSavingEnabled) {
+        // Load saved state when state saving is enabled
+        final savedStateData = await ConverterToolsDataService.getState(
+          _converterService.converterType,
+        );
 
-      //   // Validate and fix the loaded state
-      //   final validatedState = _validateAndFixState(loadedState);
-      //   _state = validatedState;
+        if (savedStateData != null) {
+          // Convert saved data back to ConverterState
+          final cards = <ConverterCardState>[];
+          final cardsData = savedStateData['cards'] as List? ?? [];
 
-      //   logInfo(
-      //     'ConverterController: Loaded and validated state with ${_state.cards.length} cards, focus: ${_state.isFocusMode}, view: ${_state.viewMode.name}',
-      //   );
-      // } else {
-      //   // Create default state when state saving is disabled
-      //   logInfo(
-      //     'ConverterController: State saving disabled, creating default state',
-      //   );
-      //   createDefaultState();
-      // }
+          for (final cardData in cardsData) {
+            if (cardData is Map<String, dynamic>) {
+              cards.add(ConverterCardState.fromJson(cardData));
+            }
+          }
+
+          final globalVisibleUnits = Set<String>.from(
+            savedStateData['globalVisibleUnits'] as List? ?? [],
+          );
+
+          final viewModeString =
+              savedStateData['viewMode'] as String? ?? 'cards';
+          final viewMode = ConverterViewMode.values.firstWhere(
+            (mode) => mode.name == viewModeString,
+            orElse: () => ConverterViewMode.cards,
+          );
+
+          final isFocusMode = savedStateData['isFocusMode'] as bool? ?? false;
+
+          // Validate and fix the loaded state
+          final validatedState = _validateAndFixState(
+            ConverterState(
+              cards: cards,
+              globalVisibleUnits: globalVisibleUnits,
+              viewMode: viewMode,
+              isFocusMode: isFocusMode,
+            ),
+          );
+
+          _state = validatedState;
+
+          logInfo(
+            'ConverterController: Loaded and validated state with ${_state.cards.length} cards, focus: ${_state.isFocusMode}, view: ${_state.viewMode.name}',
+          );
+        } else {
+          logInfo(
+            'ConverterController: No saved state found, creating default state',
+          );
+          createDefaultState();
+        }
+      } else {
+        // Create default state when state saving is disabled
+        logInfo(
+          'ConverterController: State saving disabled, creating default state',
+        );
+        createDefaultState();
+      }
     } catch (e) {
       logError('ConverterController: Error loading state: $e');
       createDefaultState();
@@ -394,17 +433,42 @@ class ConverterController extends ChangeNotifier {
 
   Future<void> _saveState() async {
     try {
-      // TODO: Init save state
-      // // Check if feature state saving is enabled before saving
-      // final settings = await ExtensibleSettingsService.getGlobalSettings();
-      // if (settings.featureStateSavingEnabled) {
-      //   await _stateService.saveState(_converterService.converterType, _state);
-      //   logInfo('Saved state with ${_state.cards.length} cards');
-      // } else {
-      //   logInfo('State saving disabled - skipping save');
-      // }
+      // Check if feature state saving is enabled before saving
+      final settings = await SettingsService.getSettings();
+      if (settings.featureStateSavingEnabled) {
+        // Convert state to Map for storage
+        final stateData = {
+          'cards': _state.cards
+              .map(
+                (card) => {
+                  'name': card.name,
+                  'baseUnitId': card.baseUnitId,
+                  'baseValue': card.baseValue,
+                  'visibleUnits': card.visibleUnits.toList(),
+                  'values': card.values,
+                },
+              )
+              .toList(),
+          'globalVisibleUnits': _state.globalVisibleUnits.toList(),
+          'viewMode': _state.viewMode.name,
+          'isFocusMode': _state.isFocusMode,
+          'lastSaved': DateTime.now().toIso8601String(),
+        };
+
+        await ConverterToolsDataService.saveState(
+          _converterService.converterType,
+          stateData,
+        );
+        logInfo(
+          'Saved ${_converterService.converterType} state with ${_state.cards.length} cards',
+        );
+      } else {
+        logInfo(
+          'State saving disabled - skipping save for ${_converterService.converterType}',
+        );
+      }
     } catch (e) {
-      logError('Error saving state: $e');
+      logError('Error saving ${_converterService.converterType} state: $e');
     }
   }
 

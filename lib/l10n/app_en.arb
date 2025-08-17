@@ -496,6 +496,24 @@
   "reloadTools": "Reload Tools",
   "compactTabLayout": "Compact Tab Layout",
   "compactTabLayoutDesc": "Hide icons in tabs for a more compact look",
+  "decimalPlaces": "Decimal Places",
+  "@decimalPlaces": {
+    "description": "Settings option for number of decimal places"
+  },
+  "decimalPlacesDesc": "Number of decimal places shown in conversion results (1-6)",
+  "@decimalPlacesDesc": {
+    "description": "Description for decimal places setting"
+  },
+  "decimalPlacesCount": "{count} digits",
+  "@decimalPlacesCount": {
+    "description": "Label for decimal places count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
   "letterCountRange": "Letter Count Range",
   "numberRangeFromTo": "Number Range: From {from} to {to}",
   "@numberRangeFromTo": {

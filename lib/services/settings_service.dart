@@ -164,6 +164,19 @@ class SettingsService {
     return settings.compactTabLayout;
   }
 
+  // Update decimal places
+  static Future<void> updateDecimalPlaces(int places) async {
+    final currentSettings = await getSettings();
+    final updatedSettings = currentSettings.copyWith(decimalPlaces: places);
+    await saveSettings(updatedSettings);
+  }
+
+  // Get decimal places
+  static Future<int> getDecimalPlaces() async {
+    final settings = await getSettings();
+    return settings.decimalPlaces;
+  }
+
   // Clear settings (for testing or reset)
   static Future<void> clearSettings() async {
     await initialize();

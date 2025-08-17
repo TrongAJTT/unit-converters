@@ -6,6 +6,7 @@ import 'package:unit_converters/layouts/single_panel_layout.dart'
 import 'package:unit_converters/l10n/app_localizations.dart';
 import 'package:unit_converters/models/converter_models/converter_base.dart'
     show ConverterViewMode;
+import 'package:unit_converters/services/app_logger.dart';
 import 'package:unit_converters/services/focus_mode_service.dart'
     show FocusModeService;
 import 'package:unit_converters/widgets/converter_tools/generic_unit_custom_dialog.dart'
@@ -105,6 +106,7 @@ class _GenericConverterViewState extends State<GenericConverterView> {
   @override
   Widget build(BuildContext context) {
     if (widget.isEmbedded) {
+      print('>>>> Embedded mode');
       return _buildConverterContent(context, widget.controller);
     }
 
@@ -145,20 +147,17 @@ class _GenericConverterViewState extends State<GenericConverterView> {
       ),
     );
 
-    // Add floating buttons for desktop (non-embedded mode only)
-    final isDesktop = MediaQuery.of(context).size.width > 600;
-    final showFloatingButtons =
-        !widget.isEmbedded && isDesktop && !controller.isFocusMode;
+    // Add floating buttons for desktop
 
-    if (showFloatingButtons) {
+    if (widget.isEmbedded) {
       final l10n = AppLocalizations.of(context)!;
       return Stack(
         children: [
           content,
           // Floating Focus Mode Button
           Positioned(
-            bottom: 80,
-            right: 16,
+            bottom: 0,
+            right: 150,
             child: FloatingActionButton(
               heroTag: "focus_btn",
               mini: true,
@@ -175,8 +174,8 @@ class _GenericConverterViewState extends State<GenericConverterView> {
           ),
           // Floating Customize Units Button
           Positioned(
-            bottom: 20,
-            right: 16,
+            bottom: 0,
+            right: 100,
             child: FloatingActionButton(
               heroTag: "customize_btn",
               mini: true,
@@ -184,6 +183,44 @@ class _GenericConverterViewState extends State<GenericConverterView> {
                   _showGlobalUnitsCustomization(context, controller),
               tooltip: l10n.customizeUnits,
               child: const Icon(Icons.tune),
+            ),
+          ),
+          // Floating Customize Units Button
+          Positioned(
+            bottom: 0,
+            right: 100,
+            child: FloatingActionButton(
+              heroTag: "customize_btn",
+              mini: true,
+              onPressed: () =>
+                  _showGlobalUnitsCustomization(context, controller),
+              tooltip: l10n.customizeUnits,
+              child: const Icon(Icons.tune),
+            ),
+          ),
+          // Floating Reset Layout Button
+          Positioned(
+            bottom: 0,
+            right: 50,
+            child: FloatingActionButton(
+              heroTag: "reset_btn",
+              mini: true,
+              onPressed: () =>
+                  _showResetLayoutConfirmation(context, controller),
+              tooltip: l10n.resetLayout,
+              child: const Icon(Icons.restart_alt),
+            ),
+          ),
+          // Floating Info Button
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: FloatingActionButton(
+              heroTag: "info_btn",
+              mini: true,
+              onPressed: widget.onShowInfo ?? () {},
+              tooltip: l10n.info,
+              child: const Icon(Icons.info),
             ),
           ),
         ],
@@ -246,28 +283,6 @@ class _GenericConverterViewState extends State<GenericConverterView> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                // Add focus button for embedded mode
-                if (widget.isEmbedded) ...[
-                  IconButton(
-                    icon: Icon(
-                      controller.isFocusMode
-                          ? Icons.center_focus_weak
-                          : Icons.center_focus_strong,
-                      size: 20,
-                    ),
-                    onPressed: () => _toggleFocusMode(context, controller),
-                    tooltip: controller.isFocusMode
-                        ? l10n.disableFocusMode
-                        : l10n.enableFocusMode,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.tune, size: 20),
-                    onPressed: () =>
-                        _showGlobalUnitsCustomization(context, controller),
-                    tooltip: l10n.customizeUnits,
-                  ),
-                  const SizedBox(width: 12),
-                ],
                 Expanded(
                   child: Text(
                     '${l10n.cards}: ${controller.state.cards.length}',
@@ -385,37 +400,40 @@ class _GenericConverterViewState extends State<GenericConverterView> {
               : const Center(child: Text('No cards available')),
         ),
 
-        // Dấu chấm indicator với khả năng tap để chuyển card
+        // Dấu chấm indicator với khả năng tap để chuyển card và navigation buttons cho mobile
         if (cardCount > 1) ...[
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              cardCount,
-              (index) => GestureDetector(
-                onTap: () {
-                  // Animate to selected page when tapped
-                  _pageController.animateToPage(
-                    index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: _currentPageIndex == index ? 12 : 8,
-                  height: _currentPageIndex == index ? 12 : 8,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentPageIndex == index
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(
-                            context,
-                          ).colorScheme.outline.withValues(alpha: 0.3),
+            children: [
+              // Page indicators
+              ...List.generate(
+                cardCount,
+                (index) => GestureDetector(
+                  onTap: () {
+                    // Animate to selected page when tapped
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: _currentPageIndex == index ? 12 : 8,
+                    height: _currentPageIndex == index ? 12 : 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentPageIndex == index
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(
+                              context,
+                            ).colorScheme.outline.withValues(alpha: 0.3),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
           const SizedBox(height: 16),
         ],
@@ -462,22 +480,6 @@ class _GenericConverterViewState extends State<GenericConverterView> {
                   ),
                 ),
                 const SizedBox(width: 12),
-                // Add focus button for embedded mode
-                if (widget.isEmbedded) ...[
-                  IconButton(
-                    icon: Icon(
-                      controller.isFocusMode
-                          ? Icons.center_focus_weak
-                          : Icons.center_focus_strong,
-                      size: 20,
-                    ),
-                    onPressed: () => _toggleFocusMode(context, controller),
-                    tooltip: controller.isFocusMode
-                        ? l10n.disableFocusMode
-                        : l10n.enableFocusMode,
-                  ),
-                  const SizedBox(width: 12),
-                ],
                 Expanded(
                   child: Text(
                     '${l10n.rows}: ${controller.state.cards.length}',

@@ -33,8 +33,7 @@ class _ToolOrderingScreenState extends State<ToolOrderingScreen> {
   }
 
   Future<void> _loadTools() async {
-    final loc = AppLocalizations.of(context)!;
-    final orderedTools = await ConverterToolsManager.getOrderedTools(loc);
+    final orderedTools = await ConverterToolsManager.getOrderedTools(context);
 
     setState(() {
       _tools = orderedTools.toList();

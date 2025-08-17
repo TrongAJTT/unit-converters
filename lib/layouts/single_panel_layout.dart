@@ -8,12 +8,13 @@ class SinglePanelLayout extends StatelessWidget {
   final List<Widget>? actions;
   final bool isEmbedded;
 
-  const SinglePanelLayout(
-      {super.key,
-      required this.title,
-      required this.child,
-      this.actions,
-      this.isEmbedded = false});
+  const SinglePanelLayout({
+    super.key,
+    required this.title,
+    required this.child,
+    this.actions,
+    this.isEmbedded = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +26,14 @@ class SinglePanelLayout extends StatelessWidget {
     final allActions = <Widget>[];
 
     if (actions != null) {
+      print('Action is not null');
       allActions.addAll(actions!);
     }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-          title,
-          overflow: TextOverflow.ellipsis,
-        ),
+        title: Text(title, overflow: TextOverflow.ellipsis),
         actions: allActions.isNotEmpty ? allActions : null,
       ),
       body: child,

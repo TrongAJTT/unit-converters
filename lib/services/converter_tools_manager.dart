@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unit_converters/l10n/app_localizations.dart';
 import 'package:unit_converters/services/tool_order_service.dart';
+import 'package:unit_converters/utils/variables_utils.dart';
 import 'package:unit_converters/widgets/generic/section_item.dart' as generic;
 import 'package:unit_converters/screens/converter_tools/length_converter_screen.dart';
 import 'package:unit_converters/screens/converter_tools/mass_converter_screen.dart';
@@ -16,9 +17,9 @@ import 'package:unit_converters/screens/converter_tools/number_system_converter_
 /// Manages the list and order of all converter tools
 class ConverterToolsManager {
   /// Get all tools in the user-defined order
-  static Future<List<ToolItem>> getOrderedTools(AppLocalizations loc) async {
+  static Future<List<ToolItem>> getOrderedTools(BuildContext ctx) async {
     final order = await ToolOrderService.getToolOrder();
-    final allTools = _getAllTools(loc);
+    final allTools = _getAllTools(ctx);
 
     // Create a map for quick lookup
     final toolMap = {for (var tool in allTools) tool.id: tool};
@@ -31,7 +32,9 @@ class ConverterToolsManager {
   }
 
   /// Get all available tools with default properties
-  static List<ToolItem> _getAllTools(AppLocalizations loc) {
+  static List<ToolItem> _getAllTools(BuildContext ctx) {
+    final loc = AppLocalizations.of(ctx)!;
+    final isEmbedded = isDesktopContext(ctx);
     return [
       ToolItem(
         id: 'length',
@@ -39,8 +42,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of length',
         icon: Icons.straighten,
         color: const Color(0xFF2196F3), // Blue
-        screenBuilder: (isEmbedded) =>
-            LengthConverterNewScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => LengthConverterNewScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'mass',
@@ -48,8 +50,7 @@ class ConverterToolsManager {
         subtitle: loc.massConverterDesc,
         icon: Icons.fitness_center,
         color: const Color(0xFFFF9800), // Orange
-        screenBuilder: (isEmbedded) =>
-            MassConverterNewScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => MassConverterNewScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'temperature',
@@ -57,8 +58,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different temperature scales',
         icon: Icons.thermostat,
         color: const Color(0xFFF44336), // Red
-        screenBuilder: (isEmbedded) =>
-            TemperatureConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => TemperatureConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'volume',
@@ -66,8 +66,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of volume',
         icon: Icons.local_drink,
         color: const Color(0xFF00BCD4), // Cyan
-        screenBuilder: (isEmbedded) =>
-            VolumeConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => VolumeConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'area',
@@ -75,8 +74,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of area',
         icon: Icons.crop_square,
         color: const Color(0xFF9C27B0), // Purple
-        screenBuilder: (isEmbedded) =>
-            AreaConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => AreaConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'speed',
@@ -84,8 +82,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of speed',
         icon: Icons.speed,
         color: const Color(0xFF4CAF50), // Green
-        screenBuilder: (isEmbedded) =>
-            SpeedConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => SpeedConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'time',
@@ -93,8 +90,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of time',
         icon: Icons.access_time,
         color: const Color(0xFFE91E63), // Pink
-        screenBuilder: (isEmbedded) =>
-            TimeConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => TimeConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'data',
@@ -102,8 +98,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different units of data storage',
         icon: Icons.storage,
         color: const Color(0xFF795548), // Brown
-        screenBuilder: (isEmbedded) =>
-            DataConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => DataConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'weight',
@@ -111,8 +106,7 @@ class ConverterToolsManager {
         subtitle: loc.weightConverterDesc,
         icon: Icons.scale,
         color: const Color(0xFF607D8B), // Blue Grey
-        screenBuilder: (isEmbedded) =>
-            WeightConverterScreen(isEmbedded: isEmbedded),
+        screenBuilder: () => WeightConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'numbersystem',
@@ -120,7 +114,7 @@ class ConverterToolsManager {
         subtitle: 'Convert between different number systems',
         icon: Icons.calculate,
         color: const Color(0xFF3F51B5), // Indigo
-        screenBuilder: (isEmbedded) =>
+        screenBuilder: () =>
             NumberSystemConverterScreen(isEmbedded: isEmbedded),
       ),
     ];
@@ -145,25 +139,9 @@ class ConverterToolsManager {
             subtitle: tool.subtitle,
             icon: tool.icon,
             iconColor: tool.color,
-            content: tool.screenBuilder(
-              true,
-            ), // Use embedded version for section items
+            content: tool.screenBuilder(),
           ),
         )
         .toList();
-  }
-}
-
-/// Convert SectionItem to ToolItem when needed
-extension SectionItemToToolItem on generic.SectionItem {
-  ToolItem toToolItem(Widget Function(bool isEmbedded) screenBuilder) {
-    return ToolItem(
-      id: id,
-      title: title,
-      subtitle: subtitle ?? '',
-      icon: icon,
-      color: iconColor ?? Colors.grey,
-      screenBuilder: screenBuilder,
-    );
   }
 }

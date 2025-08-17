@@ -92,6 +92,7 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
+    Locale.fromSubtags(languageCode: 'en', scriptCode: 'clean'),
     Locale('vi')
   ];
 
@@ -2093,6 +2094,24 @@ abstract class AppLocalizations {
   /// **'Hide icons in tabs for a more compact look'**
   String get compactTabLayoutDesc;
 
+  /// Settings option for number of decimal places
+  ///
+  /// In en, this message translates to:
+  /// **'Decimal Places'**
+  String get decimalPlaces;
+
+  /// Description for decimal places setting
+  ///
+  /// In en, this message translates to:
+  /// **'Number of decimal places shown in conversion results (1-6)'**
+  String get decimalPlacesDesc;
+
+  /// Label for decimal places count
+  ///
+  /// In en, this message translates to:
+  /// **'{count} digits'**
+  String decimalPlacesCount(int count);
+
   /// No description provided for @letterCountRange.
   ///
   /// In en, this message translates to:
@@ -3749,6 +3768,15 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
 
+  // Lookup logic when language+script codes are specified.
+  switch (locale.languageCode) {
+    case 'en': {
+  switch (locale.scriptCode) {
+    case 'clean': return AppLocalizationsEnClean();
+   }
+  break;
+   }
+  }
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {

@@ -1,12 +1,15 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:unit_converters/services/settings_service.dart';
 
 class NumberFormatService {
   static NumberFormat? _numberFormat;
   static String? _currentLocale;
+  static int _cachedDecimalPlaces = 4; // Default value
+  static bool _isInitialized = false;
 
-  /// Initialize the number formatter with the current locale
-  static void initialize(Locale locale) {
+  /// Initialize the number formatter with the current locale and load decimal places
+  static Future<void> initialize(Locale locale) async {
     final localeString = locale.toString();
 
     if (_currentLocale != localeString) {
@@ -20,6 +23,22 @@ class NumberFormatService {
         _numberFormat = NumberFormat.decimalPattern();
       }
     }
+
+    // Load decimal places setting
+    if (!_isInitialized) {
+      try {
+        _cachedDecimalPlaces = await SettingsService.getDecimalPlaces();
+        _isInitialized = true;
+      } catch (e) {
+        _cachedDecimalPlaces = 4; // Default fallback
+        _isInitialized = true;
+      }
+    }
+  }
+
+  /// Update cached decimal places when settings change
+  static void updateDecimalPlaces(int decimalPlaces) {
+    _cachedDecimalPlaces = decimalPlaces;
   }
 
   /// Format a number with locale-specific thousands separators and decimal points
@@ -150,9 +169,17 @@ class NumberFormatService {
     }
   }
 
-  /// Format length/mass/other unit values with high precision
+  /// Format length/mass/other unit values with user-defined decimal places
   static String formatUnit(double value) {
-    return formatNumber(value);
+    return formatNumber(value, decimalPlaces: _cachedDecimalPlaces);
+  }
+
+  /// Synchronous version that uses cached decimal places
+  static String formatUnitSync(double value, {int? decimalPlaces}) {
+    if (decimalPlaces != null) {
+      return formatNumber(value, decimalPlaces: decimalPlaces);
+    }
+    return formatNumber(value, decimalPlaces: _cachedDecimalPlaces);
   }
 
   /// Format percentage values
