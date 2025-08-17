@@ -106,7 +106,6 @@ class _GenericConverterViewState extends State<GenericConverterView> {
   @override
   Widget build(BuildContext context) {
     if (widget.isEmbedded) {
-      print('>>>> Embedded mode');
       return _buildConverterContent(context, widget.controller);
     }
 

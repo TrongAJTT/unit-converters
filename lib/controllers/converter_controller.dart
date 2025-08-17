@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:unit_converters/models/converter_models/converter_base.dart';
@@ -116,11 +118,33 @@ class ConverterController extends ChangeNotifier {
 
       // Check if feature state saving is enabled
       final settings = await SettingsService.getSettings();
-      logInfo(
-        'ConverterController: Feature state saving enabled: ${settings.featureStateSavingEnabled}',
+      print(
+        'ConverterController: Save random tools state enabled: ${settings.saveRandomToolsState}',
       );
 
-      if (settings.featureStateSavingEnabled) {
+      if (settings.saveRandomToolsState) {
+        // Wait for ConverterToolsDataService to be ready with retry logic
+        final converterDataService = ConverterToolsDataService.instance;
+        int retryCount = 0;
+        const maxRetries = 3;
+        const retryDelay = Duration(milliseconds: 100);
+
+        while (!converterDataService.isInitialized && retryCount < maxRetries) {
+          logInfo(
+            'ConverterController: Waiting for ConverterToolsDataService to initialize (attempt ${retryCount + 1})',
+          );
+          await Future.delayed(retryDelay);
+          retryCount++;
+        }
+
+        if (!converterDataService.isInitialized) {
+          logError(
+            'ConverterController: ConverterToolsDataService not ready after $maxRetries attempts, creating default state',
+          );
+          createDefaultState();
+          return;
+        }
+
         // Load saved state when state saving is enabled
         final savedStateData = await ConverterToolsDataService.getState(
           _converterService.converterType,
@@ -131,11 +155,22 @@ class ConverterController extends ChangeNotifier {
           final cards = <ConverterCardState>[];
           final cardsData = savedStateData['cards'] as List? ?? [];
 
+          print('🔄 Converting ${cardsData.length} cards from JSON...');
+          
           for (final cardData in cardsData) {
-            if (cardData is Map<String, dynamic>) {
-              cards.add(ConverterCardState.fromJson(cardData));
+            try {
+              // Cast to Map<String, dynamic> regardless of the original type
+              final cardMap = Map<String, dynamic>.from(cardData as Map);
+              final card = ConverterCardState.fromJson(cardMap);
+              cards.add(card);
+              print('✅ Card converted: ${card.name}');
+            } catch (e) {
+              print('❌ Failed to convert card: $e');
+              print('❌ Card data: $cardData (${cardData.runtimeType})');
             }
           }
+          
+          print('📋 Final cards list: ${cards.length} cards');
 
           final globalVisibleUnits = Set<String>.from(
             savedStateData['globalVisibleUnits'] as List? ?? [],
@@ -163,8 +198,11 @@ class ConverterController extends ChangeNotifier {
           _state = validatedState;
 
           logInfo(
-            'ConverterController: Loaded and validated state with ${_state.cards.length} cards, focus: ${_state.isFocusMode}, view: ${_state.viewMode.name}',
+            '📥 CONTROLLER LOAD: ${_converterService.converterType} state with ${_state.cards.length} cards, focus: ${_state.isFocusMode}, view: ${_state.viewMode.name}',
           );
+
+          // Notify UI about the loaded state
+          notifyListeners();
         } else {
           logInfo(
             'ConverterController: No saved state found, creating default state',
@@ -227,6 +265,9 @@ class ConverterController extends ChangeNotifier {
 
       // Validate and fix cards
       final validCards = <ConverterCardState>[];
+      print(
+        '🔍 Starting card validation for ${loadedState.cards.length} cards',
+      );
 
       for (
         int cardIndex = 0;
@@ -234,6 +275,9 @@ class ConverterController extends ChangeNotifier {
         cardIndex++
       ) {
         final card = loadedState.cards[cardIndex];
+        print('🔍 Validating card ${cardIndex + 1}: "${card.name}"');
+        print('🔍 Card baseUnitId: ${card.baseUnitId}');
+        print('🔍 Card visibleUnits: ${card.visibleUnits}');
 
         // Filter valid visible units for this card
         final validVisibleUnits = card.visibleUnits
@@ -244,6 +288,9 @@ class ConverterController extends ChangeNotifier {
             .where((unitId) => !validUnitIds.contains(unitId))
             .toList();
 
+        print('🔍 Valid units for card: ${validVisibleUnits}');
+        print('🔍 Invalid units for card: ${invalidVisibleUnits}');
+
         if (invalidVisibleUnits.isNotEmpty) {
           logError(
             'ConverterController: Card "${card.name}" has invalid units: ${invalidVisibleUnits.join(', ')}',
@@ -252,6 +299,7 @@ class ConverterController extends ChangeNotifier {
 
         // If no valid units, use default units
         if (validVisibleUnits.isEmpty) {
+          print('🔍 No valid units for card "${card.name}", using defaults');
           logError(
             'ConverterController: Card "${card.name}" has no valid units, using defaults',
           );
@@ -435,7 +483,7 @@ class ConverterController extends ChangeNotifier {
     try {
       // Check if feature state saving is enabled before saving
       final settings = await SettingsService.getSettings();
-      if (settings.featureStateSavingEnabled) {
+      if (settings.saveRandomToolsState) {
         // Convert state to Map for storage
         final stateData = {
           'cards': _state.cards
@@ -460,7 +508,7 @@ class ConverterController extends ChangeNotifier {
           stateData,
         );
         logInfo(
-          'Saved ${_converterService.converterType} state with ${_state.cards.length} cards',
+          '💾 CONTROLLER SAVE: ${_converterService.converterType} state with ${_state.cards.length} cards, viewMode: ${_state.viewMode.name}',
         );
       } else {
         logInfo(
@@ -468,7 +516,9 @@ class ConverterController extends ChangeNotifier {
         );
       }
     } catch (e) {
-      logError('Error saving ${_converterService.converterType} state: $e');
+      logError(
+        '❌ CONTROLLER SAVE ERROR: ${_converterService.converterType} state: $e',
+      );
     }
   }
 

@@ -189,7 +189,7 @@ abstract class AppLocalizations {
   /// No description provided for @supportDesc.
   ///
   /// In en, this message translates to:
-  /// **'Random Please helps you generate random data easily, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!'**
+  /// **'Unit Converters helps you convert values between multiple units fast, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!'**
   String get supportDesc;
 
   /// No description provided for @supportOnGitHub.
@@ -2094,13 +2094,13 @@ abstract class AppLocalizations {
   /// **'Hide icons in tabs for a more compact look'**
   String get compactTabLayoutDesc;
 
-  /// Settings option for number of decimal places
+  /// No description provided for @decimalPlaces.
   ///
   /// In en, this message translates to:
   /// **'Decimal Places'**
   String get decimalPlaces;
 
-  /// Description for decimal places setting
+  /// No description provided for @decimalPlacesDesc.
   ///
   /// In en, this message translates to:
   /// **'Number of decimal places shown in conversion results (1-6)'**
@@ -2109,7 +2109,7 @@ abstract class AppLocalizations {
   /// Label for decimal places count
   ///
   /// In en, this message translates to:
-  /// **'{count} digits'**
+  /// **'{count} digit(s)'**
   String decimalPlacesCount(int count);
 
   /// No description provided for @letterCountRange.
@@ -3336,11 +3336,23 @@ abstract class AppLocalizations {
   /// **'Length Converter'**
   String get lengthConverter;
 
+  /// No description provided for @lengthConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of length'**
+  String get lengthConverterInfo;
+
   /// No description provided for @temperatureConverter.
   ///
   /// In en, this message translates to:
   /// **'Temperature Converter'**
   String get temperatureConverter;
+
+  /// No description provided for @temperatureConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different temperature scales'**
+  String get temperatureConverterInfo;
 
   /// No description provided for @volumeConverter.
   ///
@@ -3348,11 +3360,23 @@ abstract class AppLocalizations {
   /// **'Volume Converter'**
   String get volumeConverter;
 
+  /// No description provided for @volumeConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of volume'**
+  String get volumeConverterInfo;
+
   /// No description provided for @areaConverter.
   ///
   /// In en, this message translates to:
   /// **'Area Converter'**
   String get areaConverter;
+
+  /// No description provided for @areaConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of area'**
+  String get areaConverterInfo;
 
   /// No description provided for @speedConverter.
   ///
@@ -3360,11 +3384,23 @@ abstract class AppLocalizations {
   /// **'Speed Converter'**
   String get speedConverter;
 
+  /// No description provided for @speedConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of speed'**
+  String get speedConverterInfo;
+
   /// No description provided for @timeConverter.
   ///
   /// In en, this message translates to:
   /// **'Time Converter'**
   String get timeConverter;
+
+  /// No description provided for @timeConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of time'**
+  String get timeConverterInfo;
 
   /// No description provided for @dataConverter.
   ///
@@ -3372,11 +3408,23 @@ abstract class AppLocalizations {
   /// **'Data Storage Converter'**
   String get dataConverter;
 
+  /// No description provided for @dataConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different units of data storage'**
+  String get dataConverterInfo;
+
   /// No description provided for @numberSystemConverter.
   ///
   /// In en, this message translates to:
   /// **'Number System Converter'**
   String get numberSystemConverter;
+
+  /// No description provided for @numberSystemConverterInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Convert between different number systems'**
+  String get numberSystemConverterInfo;
 
   /// No description provided for @massConverter.
   ///
@@ -3387,14 +3435,8 @@ abstract class AppLocalizations {
   /// No description provided for @massConverterInfo.
   ///
   /// In en, this message translates to:
-  /// **'Mass Converter Info'**
-  String get massConverterInfo;
-
-  /// No description provided for @massConverterDesc.
-  ///
-  /// In en, this message translates to:
   /// **'Convert between mass units (kg, lb, oz)'**
-  String get massConverterDesc;
+  String get massConverterInfo;
 
   /// No description provided for @weightConverter.
   ///

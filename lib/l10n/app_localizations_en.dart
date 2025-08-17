@@ -54,7 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get donorsAckDesc => 'List of publicly acknowledged supporters. Thank you very much!';
 
   @override
-  String get supportDesc => 'Random Please helps you generate random data easily, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!';
+  String get supportDesc => 'Unit Converters helps you convert values between multiple units fast, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!';
 
   @override
   String get supportOnGitHub => 'Support on GitHub';
@@ -1045,7 +1045,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String decimalPlacesCount(int count) {
-    return '$count digits';
+    return '$count digit(s)';
   }
 
   @override
@@ -1695,34 +1695,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lengthConverter => 'Length Converter';
 
   @override
+  String get lengthConverterInfo => 'Convert between different units of length';
+
+  @override
   String get temperatureConverter => 'Temperature Converter';
+
+  @override
+  String get temperatureConverterInfo => 'Convert between different temperature scales';
 
   @override
   String get volumeConverter => 'Volume Converter';
 
   @override
+  String get volumeConverterInfo => 'Convert between different units of volume';
+
+  @override
   String get areaConverter => 'Area Converter';
+
+  @override
+  String get areaConverterInfo => 'Convert between different units of area';
 
   @override
   String get speedConverter => 'Speed Converter';
 
   @override
+  String get speedConverterInfo => 'Convert between different units of speed';
+
+  @override
   String get timeConverter => 'Time Converter';
+
+  @override
+  String get timeConverterInfo => 'Convert between different units of time';
 
   @override
   String get dataConverter => 'Data Storage Converter';
 
   @override
+  String get dataConverterInfo => 'Convert between different units of data storage';
+
+  @override
   String get numberSystemConverter => 'Number System Converter';
+
+  @override
+  String get numberSystemConverterInfo => 'Convert between different number systems';
 
   @override
   String get massConverter => 'Mass Converter';
 
   @override
-  String get massConverterInfo => 'Mass Converter Info';
-
-  @override
-  String get massConverterDesc => 'Convert between mass units (kg, lb, oz)';
+  String get massConverterInfo => 'Convert between mass units (kg, lb, oz)';
 
   @override
   String get weightConverter => 'Weight Converter';

@@ -1,4 +1,6 @@
 import '../hive_service.dart';
+import '../security_service.dart';
+import '../security_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:developer' as developer;
 
@@ -18,24 +20,116 @@ class ConverterToolsDataService {
   factory ConverterToolsDataService() => _instance;
   ConverterToolsDataService._internal();
 
+  // Static getter for easier access
+  static ConverterToolsDataService get instance => _instance;
+
   Box? _converterDataBox;
+  bool _isInitialized = false;
   static const String _boxName = 'converter_tools_data';
+
+  /// Check if service is properly initialized
+  bool get isInitialized =>
+      _isInitialized && _converterDataBox != null && _converterDataBox!.isOpen;
 
   /// Initialize the service
   Future<void> initialize() async {
+    if (_isInitialized &&
+        _converterDataBox != null &&
+        _converterDataBox!.isOpen) {
+      print('ConverterToolsDataService: Already initialized, skipping');
+      return;
+    }
+
     try {
-      _converterDataBox = await HiveService.getBox<Map>(_boxName);
-      developer.log('ConverterToolsDataService initialized successfully');
+      // Check if Data Protection is enabled and we need encryption
+      final isSecurityEnabled = await SecurityService.isSecurityEnabled();
+
+      if (isSecurityEnabled) {
+        // Get encryption key if security is enabled and user is authenticated
+        final securityManager = SecurityManager.instance;
+        final encryptionKey = securityManager.currentEncryptionKey;
+
+        if (encryptionKey != null) {
+          // Try to open box with encryption
+          print('ConverterToolsDataService: Opening encrypted box');
+          try {
+            _converterDataBox = await Hive.openBox<Map>(
+              _boxName,
+              encryptionCipher: HiveAesCipher(encryptionKey),
+            );
+          } catch (e) {
+            // If encryption fails, might be due to existing unencrypted data
+            print(
+              'ConverterToolsDataService: Encryption failed, trying to clear and recreate box: $e',
+            );
+            try {
+              // Delete the problematic box
+              await Hive.deleteBoxFromDisk(_boxName);
+              // Try again with encryption
+              _converterDataBox = await Hive.openBox<Map>(
+                _boxName,
+                encryptionCipher: HiveAesCipher(encryptionKey),
+              );
+              print(
+                'ConverterToolsDataService: Successfully recreated encrypted box',
+              );
+            } catch (e2) {
+              print(
+                'ConverterToolsDataService: Failed to recreate encrypted box, falling back to unencrypted: $e2',
+              );
+              _converterDataBox = await HiveService.getBox<Map>(_boxName);
+            }
+          }
+        } else {
+          // Security enabled but not authenticated
+          print(
+            'ConverterToolsDataService: Security enabled but no encryption key available, falling back to unencrypted',
+          );
+          _converterDataBox = await HiveService.getBox<Map>(_boxName);
+        }
+      } else {
+        // No security enabled, use regular box
+        print('ConverterToolsDataService: Opening unencrypted box');
+        _converterDataBox = await HiveService.getBox<Map>(_boxName);
+      }
+
+      _isInitialized = true;
+      print('ConverterToolsDataService initialized successfully');
     } catch (e) {
-      developer.log('Failed to initialize ConverterToolsDataService: $e');
+      _isInitialized = false;
+      print('Failed to initialize ConverterToolsDataService: $e');
+      rethrow;
+    }
+  }
+
+  /// Reinitialize the service (call when security status changes)
+  Future<void> reinitialize() async {
+    try {
+      // Close existing box if open
+      if (_converterDataBox != null && _converterDataBox!.isOpen) {
+        await _converterDataBox!.close();
+        _converterDataBox = null;
+      }
+
+      _isInitialized = false;
+
+      // Reinitialize with current security settings
+      await initialize();
+    } catch (e) {
+      _isInitialized = false;
+      print('Failed to reinitialize ConverterToolsDataService: $e');
       rethrow;
     }
   }
 
   /// Get Hive box instance
   Box get _database {
-    if (_converterDataBox == null || !_converterDataBox!.isOpen) {
-      throw Exception('Converter data box is not initialized');
+    if (!_isInitialized ||
+        _converterDataBox == null ||
+        !_converterDataBox!.isOpen) {
+      throw Exception(
+        'Converter data box is not properly initialized. Call initialize() first.',
+      );
     }
     return _converterDataBox!;
   }
@@ -62,10 +156,29 @@ class ConverterToolsDataService {
         'lastUpdated': DateTime.now().toIso8601String(),
       };
 
+      print('💾 SAVING - Key: $key, Tool: $toolCode, Type: $dataType');
+      print('💾 Data keys: ${data.keys.toList()}');
+      
+      // Show card count if this is state data
+      if (dataType == 'state' && data.containsKey('cards')) {
+        final cards = data['cards'] as List?;
+        print('💾 Number of cards being saved: ${cards?.length ?? 0}');
+        if (cards != null && cards.isNotEmpty) {
+          print('💾 Card names: ${cards.map((c) => c['name']).toList()}');
+        }
+      }
+      
       await _database.put(key, entry);
-      developer.log('Saved data for tool: $toolCode, type: $dataType');
+
+      // Debug: Check total entries
+      final totalEntries = _database.length;
+      print('📊 Total tool entries in box: $totalEntries');
+      
+      // Show all keys in box
+      final allKeys = _database.keys.toList();
+      print('🔑 All tool keys: $allKeys');
     } catch (e) {
-      developer.log('Failed to save data for tool $toolCode: $e');
+      print('❌ FAILED to save data for tool $toolCode: $e');
       rethrow;
     }
   }
@@ -79,12 +192,29 @@ class ConverterToolsDataService {
       final key = _generateKey(toolCode, dataType);
       final entry = _database.get(key);
 
+      print('📖 LOADING - Key: $key, Tool: $toolCode, Type: $dataType');
+      print('📖 Entry found: ${entry != null}');
+
       if (entry != null && entry is Map) {
-        return Map<String, dynamic>.from(entry['data'] ?? {});
+        final data = Map<String, dynamic>.from(entry['data'] ?? {});
+        print('📖 Data keys loaded: ${data.keys.toList()}');
+        
+        // Show card count if this is state data
+        if (dataType == 'state' && data.containsKey('cards')) {
+          final cards = data['cards'] as List?;
+          print('📖 Number of cards loaded: ${cards?.length ?? 0}');
+          if (cards != null && cards.isNotEmpty) {
+            print('📖 Card names: ${cards.map((c) => c['name']).toList()}');
+          }
+        }
+        
+        return data;
+      } else {
+        print('📖 No data found for key: $key');
+        return null;
       }
-      return null;
     } catch (e) {
-      developer.log('Failed to get data for tool $toolCode: $e');
+      print('❌ FAILED to get data for tool $toolCode: $e');
       return null;
     }
   }
@@ -93,7 +223,7 @@ class ConverterToolsDataService {
   Future<List<Map<String, dynamic>>> getToolData(String toolCode) async {
     try {
       final List<Map<String, dynamic>> result = [];
-      
+
       for (final key in _database.keys) {
         if (key.toString().startsWith('${toolCode}_')) {
           final entry = _database.get(key);
@@ -102,10 +232,10 @@ class ConverterToolsDataService {
           }
         }
       }
-      
+
       return result;
     } catch (e) {
-      developer.log('Failed to get tool data for $toolCode: $e');
+      print('Failed to get tool data for $toolCode: $e');
       return [];
     }
   }
@@ -118,9 +248,9 @@ class ConverterToolsDataService {
     try {
       final key = _generateKey(toolCode, dataType);
       await _database.delete(key);
-      developer.log('Deleted data for tool: $toolCode, type: $dataType');
+      print('Deleted data for tool: $toolCode, type: $dataType');
     } catch (e) {
-      developer.log('Failed to delete data for tool $toolCode: $e');
+      print('Failed to delete data for tool $toolCode: $e');
       rethrow;
     }
   }
@@ -129,17 +259,17 @@ class ConverterToolsDataService {
   Future<void> deleteAllToolData(String toolCode) async {
     try {
       final keysToDelete = <String>[];
-      
+
       for (final key in _database.keys) {
         if (key.toString().startsWith('${toolCode}_')) {
           keysToDelete.add(key.toString());
         }
       }
-      
+
       await _database.deleteAll(keysToDelete);
-      developer.log('Deleted all data for tool: $toolCode');
+      print('Deleted all data for tool: $toolCode');
     } catch (e) {
-      developer.log('Failed to delete all data for tool $toolCode: $e');
+      print('Failed to delete all data for tool $toolCode: $e');
       rethrow;
     }
   }
@@ -148,9 +278,9 @@ class ConverterToolsDataService {
   Future<void> clearAllData() async {
     try {
       await _database.clear();
-      developer.log('Cleared all converter tools data');
+      print('Cleared all converter tools data');
     } catch (e) {
-      developer.log('Failed to clear all data: $e');
+      print('Failed to clear all data: $e');
       rethrow;
     }
   }
@@ -169,7 +299,7 @@ class ConverterToolsDataService {
       }
       return null;
     } catch (e) {
-      developer.log('Failed to get metadata for tool $toolCode: $e');
+      print('Failed to get metadata for tool $toolCode: $e');
       return null;
     }
   }
@@ -191,9 +321,9 @@ class ConverterToolsDataService {
         await _database.put(key, updatedEntry);
       }
 
-      developer.log('Updated metadata for tool: $toolCode, type: $dataType');
+      print('Updated metadata for tool: $toolCode, type: $dataType');
     } catch (e) {
-      developer.log('Failed to update metadata for tool $toolCode: $e');
+      print('Failed to update metadata for tool $toolCode: $e');
       rethrow;
     }
   }
@@ -202,7 +332,7 @@ class ConverterToolsDataService {
   Future<List<String>> getAllToolCodes() async {
     try {
       final Set<String> toolCodes = <String>{};
-      
+
       for (final key in _database.keys) {
         final keyString = key.toString();
         final parts = keyString.split('_');
@@ -210,10 +340,10 @@ class ConverterToolsDataService {
           toolCodes.add(parts[0]);
         }
       }
-      
+
       return toolCodes.toList();
     } catch (e) {
-      developer.log('Failed to get all tool codes: $e');
+      print('Failed to get all tool codes: $e');
       return [];
     }
   }
@@ -222,16 +352,16 @@ class ConverterToolsDataService {
   Future<int> getToolDataCount(String toolCode) async {
     try {
       int count = 0;
-      
+
       for (final key in _database.keys) {
         if (key.toString().startsWith('${toolCode}_')) {
           count++;
         }
       }
-      
+
       return count;
     } catch (e) {
-      developer.log('Failed to get data count for tool $toolCode: $e');
+      print('Failed to get data count for tool $toolCode: $e');
       return 0;
     }
   }
@@ -241,7 +371,7 @@ class ConverterToolsDataService {
     try {
       return _database.length;
     } catch (e) {
-      developer.log('Failed to get total data count: $e');
+      print('Failed to get total data count: $e');
       return 0;
     }
   }
@@ -250,17 +380,17 @@ class ConverterToolsDataService {
   Future<List<Map<String, dynamic>>> exportAllData() async {
     try {
       final List<Map<String, dynamic>> result = [];
-      
+
       for (final key in _database.keys) {
         final entry = _database.get(key);
         if (entry != null && entry is Map) {
           result.add(Map<String, dynamic>.from(entry));
         }
       }
-      
+
       return result;
     } catch (e) {
-      developer.log('Failed to export all data: $e');
+      print('Failed to export all data: $e');
       return [];
     }
   }
@@ -315,13 +445,13 @@ class ConverterToolsDataService {
         final toolCode = dataMap['toolCode'] as String;
         final dataType = dataMap['dataType'] as String;
         final key = _generateKey(toolCode, dataType);
-        
+
         await _database.put(key, dataMap);
       }
 
-      developer.log('Imported ${dataList.length} data entries');
+      print('Imported ${dataList.length} data entries');
     } catch (e) {
-      developer.log('Failed to import data: $e');
+      print('Failed to import data: $e');
       rethrow;
     }
   }

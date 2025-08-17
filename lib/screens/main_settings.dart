@@ -40,7 +40,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
   late ThemeMode _themeMode = settingsController.themeMode;
   late String _language = settingsController.locale.languageCode;
   bool _loading = true;
-  bool _compactTabLayout = false;
   int _decimalPlaces = 4;
   bool _saveConverterToolsState = true;
 
@@ -67,20 +66,16 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     final prefs = await SharedPreferences.getInstance();
     final themeIndex = prefs.getInt('themeMode');
     final lang = prefs.getString('language');
-    final compactTabLayout = await SettingsService.getCompactTabLayout();
     final decimalPlaces = await SettingsService.getDecimalPlaces();
     final saveConverterToolsState =
-        await SettingsService.getFeatureStateSaving();
+        await SettingsService.getSaveRandomToolsState();
 
     setState(() {
       _themeMode = themeIndex != null
           ? ThemeMode.values[themeIndex]
           : settingsController.themeMode;
       _language = lang ?? settingsController.locale.languageCode;
-      // _logRetentionDays = logRetentionDays;
-      _compactTabLayout = compactTabLayout;
       _decimalPlaces = decimalPlaces;
-      _saveConverterToolsState = saveConverterToolsState;
       _saveConverterToolsState = saveConverterToolsState;
 
       _loading = false;
@@ -112,11 +107,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     }
   }
 
-  void _onCompactTabLayoutChanged(bool enabled) async {
-    setState(() => _compactTabLayout = enabled);
-    await SettingsService.updateCompactTabLayout(enabled);
-  }
-
   void _onDecimalPlacesChanged(int places) async {
     setState(() => _decimalPlaces = places);
     await SettingsService.updateDecimalPlaces(places);
@@ -126,7 +116,7 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
 
   void _onSaveConverterToolsStateChanged(bool enabled) async {
     setState(() => _saveConverterToolsState = enabled);
-    await SettingsService.updateFeatureStateSaving(enabled);
+    await SettingsService.updateSaveRandomToolsState(enabled);
   }
 
   @override
@@ -222,7 +212,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
                 ],
               ),
         const SizedBox(height: 24),
-        _buildCompactTabLayoutSettings(loc),
       ],
     );
   }
@@ -232,9 +221,9 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildSaveConverterToolsStateSettings(loc),
-        const SizedBox(height: 24),
+        VerticalSpacingDivider.both(12),
         _buildDecimalPlacesSettings(loc),
-        VerticalSpacingDivider.both(6),
+        VerticalSpacingDivider.onlyBottom(6),
         _buildToolOrderingSettings(loc),
       ],
     );
@@ -339,16 +328,6 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
     );
   }
 
-  Widget _buildCompactTabLayoutSettings(AppLocalizations loc) {
-    return OptionSwitch(
-      title: loc.compactTabLayout,
-      subtitle: loc.compactTabLayoutDesc,
-      value: _compactTabLayout,
-      onChanged: _onCompactTabLayoutChanged,
-      decorator: switchDecorator,
-    );
-  }
-
   Widget _buildSaveConverterToolsStateSettings(AppLocalizations loc) {
     return OptionSwitch(
       title: loc.saveConverterToolsState,
@@ -361,14 +340,13 @@ class _MainSettingsScreenState extends State<MainSettingsScreen> {
 
   Widget _buildDecimalPlacesSettings(AppLocalizations loc) {
     return OptionSlider<int>(
-      label:
-          "Decimal Places", // Temporary hardcoded until localization is fixed
-      subtitle: "Number of decimal places shown in conversion results (1-6)",
+      label: loc.decimalPlaces,
+      subtitle: loc.decimalPlacesDesc,
       icon: Icons.settings,
       currentValue: _decimalPlaces,
       options: List.generate(
         6, // Support 1-6 decimal places
-        (i) => SliderOption(value: i + 1, label: "${i + 1} digits"),
+        (i) => SliderOption(value: i + 1, label: loc.decimalPlacesCount(i + 1)),
       ),
       onChanged: _onDecimalPlacesChanged,
       layout: OptionSliderLayout.none,

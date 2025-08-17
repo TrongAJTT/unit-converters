@@ -4,6 +4,7 @@ import 'package:unit_converters/l10n/app_localizations.dart';
 import 'package:unit_converters/services/app_logger.dart';
 import 'package:unit_converters/services/security_service.dart';
 import 'package:unit_converters/services/data_migration_service.dart';
+import 'package:unit_converters/services/converter_services/converter_tools_data_service.dart';
 import 'package:unit_converters/widgets/security/security_dialogs.dart';
 
 class SecurityManager extends ChangeNotifier {
@@ -96,6 +97,20 @@ class SecurityManager extends ChangeNotifier {
     if (_currentEncryptionKey != null) {
       _isAuthenticated = true;
       _currentMasterPassword = password;
+
+      // Reinitialize ConverterToolsDataService with encryption key
+      try {
+        final converterDataService = ConverterToolsDataService();
+        await converterDataService.reinitialize();
+        logDebug(
+          'SecurityManager.authenticate: ConverterToolsDataService reinitialized with encryption',
+        );
+      } catch (e) {
+        logError(
+          'SecurityManager.authenticate: Failed to reinitialize ConverterToolsDataService: $e',
+        );
+      }
+
       notifyListeners();
       return true;
     }
@@ -128,6 +143,26 @@ class SecurityManager extends ChangeNotifier {
         _currentEncryptionKey = await SecurityService.getEncryptionKey(
           masterPassword,
         );
+
+        // Reinitialize ConverterToolsDataService with encryption
+        try {
+          final converterDataService = ConverterToolsDataService();
+          await converterDataService.reinitialize();
+          logDebug(
+            'SecurityManager.enableSecurity: ConverterToolsDataService reinitialized with encryption',
+          );
+
+          // Migrate converter data to encrypted format
+          await DataMigrationService.migrateConverterDataToEncrypted();
+          logDebug(
+            'SecurityManager.enableSecurity: Converter data migrated to encrypted format',
+          );
+        } catch (e) {
+          logError(
+            'SecurityManager.enableSecurity: Failed to reinitialize ConverterToolsDataService: $e',
+          );
+        }
+
         notifyListeners();
         logDebug('SecurityManager.enableSecurity: State updated and notified');
         return true;
@@ -172,6 +207,26 @@ class SecurityManager extends ChangeNotifier {
         _isAuthenticated = true; // Still authenticated, just no security
         _currentMasterPassword = null;
         _currentEncryptionKey = null;
+
+        // Reinitialize ConverterToolsDataService without encryption
+        try {
+          final converterDataService = ConverterToolsDataService();
+          await converterDataService.reinitialize();
+          logDebug(
+            'SecurityManager.disableSecurity: ConverterToolsDataService reinitialized without encryption',
+          );
+
+          // Migrate converter data to unencrypted format
+          await DataMigrationService.migrateConverterDataToUnencrypted();
+          logDebug(
+            'SecurityManager.disableSecurity: Converter data migrated to unencrypted format',
+          );
+        } catch (e) {
+          logError(
+            'SecurityManager.disableSecurity: Failed to reinitialize ConverterToolsDataService: $e',
+          );
+        }
+
         notifyListeners();
         return true;
       }

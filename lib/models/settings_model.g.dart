@@ -17,36 +17,18 @@ class SettingsModelAdapter extends TypeAdapter<SettingsModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SettingsModel(
-      fetchTimeoutSeconds: fields[0] as int,
-      featureStateSavingEnabled: fields[1] as bool,
-      logRetentionDays: fields[2] as int,
-      fetchRetryTimes: fields[3] as int,
-      focusModeEnabled: fields[4] as bool,
-      saveRandomToolsState: fields[5] as bool,
-      compactTabLayout: fields[6] as bool,
-      decimalPlaces: fields[7] as int,
+      saveRandomToolsState: fields[0] as bool,
+      decimalPlaces: fields[1] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, SettingsModel obj) {
     writer
-      ..writeByte(8)
-      ..writeByte(0)
-      ..write(obj.fetchTimeoutSeconds)
-      ..writeByte(1)
-      ..write(obj.featureStateSavingEnabled)
       ..writeByte(2)
-      ..write(obj.logRetentionDays)
-      ..writeByte(3)
-      ..write(obj.fetchRetryTimes)
-      ..writeByte(4)
-      ..write(obj.focusModeEnabled)
-      ..writeByte(5)
+      ..writeByte(0)
       ..write(obj.saveRandomToolsState)
-      ..writeByte(6)
-      ..write(obj.compactTabLayout)
-      ..writeByte(7)
+      ..writeByte(1)
       ..write(obj.decimalPlaces);
   }
 

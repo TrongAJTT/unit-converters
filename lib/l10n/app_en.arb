@@ -15,7 +15,7 @@
   "creditAckDesc": "Libraries and resources used in this app",
   "donorsAck": "Supporters Acknowledgment",
   "donorsAckDesc": "List of publicly acknowledged supporters. Thank you very much!",
-  "supportDesc": "Random Please helps you generate random data easily, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!",
+  "supportDesc": "Unit Converters helps you convert values between multiple units fast, conveniently, and at no cost. If you find it useful, consider supporting me to maintain and improve it. Thank you very much!",
   "supportOnGitHub": "Support on GitHub",
   "donate": "Donate",
   "donateDesc": "Support me if you find this app useful",
@@ -497,14 +497,8 @@
   "compactTabLayout": "Compact Tab Layout",
   "compactTabLayoutDesc": "Hide icons in tabs for a more compact look",
   "decimalPlaces": "Decimal Places",
-  "@decimalPlaces": {
-    "description": "Settings option for number of decimal places"
-  },
   "decimalPlacesDesc": "Number of decimal places shown in conversion results (1-6)",
-  "@decimalPlacesDesc": {
-    "description": "Description for decimal places setting"
-  },
-  "decimalPlacesCount": "{count} digits",
+  "decimalPlacesCount": "{count} digit(s)",
   "@decimalPlacesCount": {
     "description": "Label for decimal places count",
     "placeholders": {
@@ -797,17 +791,31 @@
     "saveFeatureStateDesc": "Ghi nhớ trạng thái của các tính năng giữa các phiên sử dụng",
 
     "lengthConverter": "Length Converter",
+    "lengthConverterInfo": "Convert between different units of length",
+
     "temperatureConverter": "Temperature Converter",
+    "temperatureConverterInfo": "Convert between different temperature scales",
+
     "volumeConverter": "Volume Converter",
+    "volumeConverterInfo": "Convert between different units of volume",
+
     "areaConverter": "Area Converter",
+    "areaConverterInfo": "Convert between different units of area",
+
     "speedConverter": "Speed Converter",
+    "speedConverterInfo": "Convert between different units of speed",
+
     "timeConverter": "Time Converter",
+    "timeConverterInfo": "Convert between different units of time",
+
     "dataConverter": "Data Storage Converter",
+    "dataConverterInfo": "Convert between different units of data storage",
+
     "numberSystemConverter": "Number System Converter",
+    "numberSystemConverterInfo": "Convert between different number systems",
 
     "massConverter": "Mass Converter",
-    "massConverterInfo": "Mass Converter Info",
-    "massConverterDesc": "Convert between mass units (kg, lb, oz)",
+    "massConverterInfo": "Convert between mass units (kg, lb, oz)",
 
     "weightConverter": "Weight Converter",
     "weightConverterInfo": "Weight Converter Info",

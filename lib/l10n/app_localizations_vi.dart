@@ -9,7 +9,7 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
-  String get title => 'Random Please';
+  String get title => 'Unit Converters';
 
   @override
   String get appVersion => 'Phiên bản Ứng dụng';
@@ -54,7 +54,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get donorsAckDesc => 'Danh sách đánh giá của những người ủng hộ công khai. Cảm ơn các bạn rất nhiều!';
 
   @override
-  String get supportDesc => 'Random Please giúp bạn tạo dữ liệu ngẫu nhiên một cách dễ dàng, thuận tiện và miễn phí. Nếu bạn thấy ứng dụng hữu ích, hãy cân nhắc hỗ trợ mình để giúp mình duy trì và phát triển ứng dụng này. Cảm ơn bạn rất nhiều!';
+  String get supportDesc => 'Unit Converters giúp bạn chuyển đổi giá trị giữa nhiều đơn vị một cách nhanh chóng, thuận tiện và miễn phí. Nếu bạn thấy ứng dụng hữu ích, hãy cân nhắc hỗ trợ mình để giúp mình duy trì và phát triển ứng dụng này. Cảm ơn bạn rất nhiều!';
 
   @override
   String get supportOnGitHub => 'Hỗ trợ trên GitHub';
@@ -910,7 +910,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get createMasterPasswordTitle => 'Tạo mật khẩu chính';
 
   @override
-  String get createMasterPasswordMessage => 'Vui lòng tạo một mật khẩu chính mạnh.\nHãy nhớ kỹ mật khẩu này.\nnếu quên, toàn bộ dữ liệu sẽ bị mất.';
+  String get createMasterPasswordMessage => 'Vui lòng tạo một mật khẩu chính mạnh.\nHãy nhớ kỹ mật khẩu này.\nNếu quên, toàn bộ dữ liệu sẽ bị mất.';
 
   @override
   String get enterPassword => 'Nhập mật khẩu';
@@ -1695,43 +1695,64 @@ class AppLocalizationsVi extends AppLocalizations {
   String get lengthConverter => 'Chuyển đổi Chiều dài';
 
   @override
+  String get lengthConverterInfo => 'Chuyển đổi giữa các đơn vị chiều dài khác nhau';
+
+  @override
   String get temperatureConverter => 'Chuyển đổi Nhiệt độ';
+
+  @override
+  String get temperatureConverterInfo => 'Chuyển đổi giữa các đơn vị nhiệt độ khác nhau';
 
   @override
   String get volumeConverter => 'Chuyển đổi Thể tích';
 
   @override
+  String get volumeConverterInfo => 'Chuyển đổi giữa các đơn vị thể tích khác nhau';
+
+  @override
   String get areaConverter => 'Chuyển đổi Diện tích';
+
+  @override
+  String get areaConverterInfo => 'Chuyển đổi giữa các đơn vị diện tích khác nhau';
 
   @override
   String get speedConverter => 'Chuyển đổi Tốc độ';
 
   @override
+  String get speedConverterInfo => 'Chuyển đổi giữa các đơn vị tốc độ khác nhau';
+
+  @override
   String get timeConverter => 'Chuyển đổi Thời gian';
+
+  @override
+  String get timeConverterInfo => 'Chuyển đổi giữa các đơn vị thời gian khác nhau';
 
   @override
   String get dataConverter => 'Chuyển đổi Dung lượng';
 
   @override
+  String get dataConverterInfo => 'Chuyển đổi giữa các đơn vị dung lượng khác nhau';
+
+  @override
   String get numberSystemConverter => 'Chuyển đổi Hệ số';
+
+  @override
+  String get numberSystemConverterInfo => 'Chuyển đổi giữa các hệ số khác nhau';
 
   @override
   String get massConverter => 'Chuyển đổi Khối lượng';
 
   @override
-  String get massConverterInfo => 'Thông tin Chuyển đổi Khối lượng';
-
-  @override
-  String get massConverterDesc => 'Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)';
+  String get massConverterInfo => 'Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)';
 
   @override
   String get weightConverter => 'Chuyển đổi Trọng lượng';
 
   @override
-  String get weightConverterInfo => 'Thông tin Chuyển đổi Trọng lượng';
+  String get weightConverterInfo => 'Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)';
 
   @override
-  String get weightConverterDesc => 'Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)';
+  String get weightConverterDesc => 'Convert between force/weight units (N, kgf, lbf)';
 
   @override
   String get saveConverterToolsState => 'Lưu Trạng Thái Công Cụ Chuyển Đổi';

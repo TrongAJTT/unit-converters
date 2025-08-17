@@ -1,6 +1,6 @@
 {
   "@@locale": "vi",
-  "title": "Random Please",
+  "title": "Unit Converters",
   "appVersion": "Phiên bản Ứng dụng",
   "versionType": "Loại Phiên bản",
   "versionTypeDev": "Phát triển",
@@ -15,7 +15,7 @@
   "creditAckDesc": "Danh sách các thư viện, công cụ và nguồn tài nguyên đã sử dụng trong ứng dụng này.",
   "donorsAck": "Ghi công người ủng hộ",
   "donorsAckDesc": "Danh sách đánh giá của những người ủng hộ công khai. Cảm ơn các bạn rất nhiều!",
-  "supportDesc": "Random Please giúp bạn tạo dữ liệu ngẫu nhiên một cách dễ dàng, thuận tiện và miễn phí. Nếu bạn thấy ứng dụng hữu ích, hãy cân nhắc hỗ trợ mình để giúp mình duy trì và phát triển ứng dụng này. Cảm ơn bạn rất nhiều!",
+  "supportDesc": "Unit Converters giúp bạn chuyển đổi giá trị giữa nhiều đơn vị một cách nhanh chóng, thuận tiện và miễn phí. Nếu bạn thấy ứng dụng hữu ích, hãy cân nhắc hỗ trợ mình để giúp mình duy trì và phát triển ứng dụng này. Cảm ơn bạn rất nhiều!",
   "supportOnGitHub": "Hỗ trợ trên GitHub",
   "donate": "Ủng hộ",
   "donateDesc": "Hỗ trợ tôi nếu bạn thấy ứng dụng này hữu ích",
@@ -415,7 +415,7 @@
   "setMasterPassword": "Đặt mật khẩu chính",
   "skipSecurity": "Bỏ qua (Sử dụng không cần mật khẩu)",
   "createMasterPasswordTitle": "Tạo mật khẩu chính",
-  "createMasterPasswordMessage": "Vui lòng tạo một mật khẩu chính mạnh.\nHãy nhớ kỹ mật khẩu này.\nnếu quên, toàn bộ dữ liệu sẽ bị mất.",
+  "createMasterPasswordMessage": "Vui lòng tạo một mật khẩu chính mạnh.\nHãy nhớ kỹ mật khẩu này.\nNếu quên, toàn bộ dữ liệu sẽ bị mất.",
   "enterPassword": "Nhập mật khẩu",
   "confirm": "Xác nhận",
   "confirmPassword": "Xác nhận mật khẩu",
@@ -842,107 +842,51 @@
     
     "converterTools": "Công cụ chuyển đổi",
     "converterToolsDesc": "Chuyển đổi giữa các đơn vị và hệ thống khác nhau",
+
     "lengthConverter": "Chuyển đổi Chiều dài",
+    "lengthConverterInfo": "Chuyển đổi giữa các đơn vị chiều dài khác nhau",
+
     "weightConverter": "Chuyển đổi Trọng lượng",
-    "@weightConverter": {
-        "description": "Tiêu đề cho công cụ chuyển đổi trọng lượng"
-    },
-    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
-    "@weightConverterInfo": {
-        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi trọng lượng"
-    },
+    "weightConverterInfo": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
     "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
-    "@customizeWeightUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị trọng lượng"
-    },
-    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
-    "@weightConverterDesc": {
-        "description": "Mô tả cho công cụ chuyển đổi trọng lượng"
-    },
+
     "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
-    "@customizeMassUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
-    },
+
     "massConverter": "Chuyển đổi Khối lượng",
-    "@massConverter": {
-        "description": "Tiêu đề cho công cụ chuyển đổi khối lượng"
-    },
-    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
-    "@massConverterInfo": {
-        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi khối lượng"
-    },
-    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
-    "@massConverterDesc": {
-        "description": "Mô tả cho công cụ chuyển đổi khối lượng"
-    },
+    "massConverterInfo": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
+
     "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
-    "@customizeMassUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
-    },
+
     "temperatureConverter": "Chuyển đổi Nhiệt độ",
+    "temperatureConverterInfo": "Chuyển đổi giữa các đơn vị nhiệt độ khác nhau",
+
     "volumeConverter": "Chuyển đổi Thể tích",
+    "volumeConverterInfo": "Chuyển đổi giữa các đơn vị thể tích khác nhau",
+
     "areaConverter": "Chuyển đổi Diện tích",
+    "areaConverterInfo": "Chuyển đổi giữa các đơn vị diện tích khác nhau",
+
     "speedConverter": "Chuyển đổi Tốc độ",
+    "speedConverterInfo": "Chuyển đổi giữa các đơn vị tốc độ khác nhau",
+
     "timeConverter": "Chuyển đổi Thời gian",
+    "timeConverterInfo": "Chuyển đổi giữa các đơn vị thời gian khác nhau",
+
     "dataConverter": "Chuyển đổi Dung lượng",
-    "numberSystemConverter": "Chuyển đổi Hệ số",    
-    
+    "dataConverterInfo": "Chuyển đổi giữa các đơn vị dung lượng khác nhau",
+
+    "numberSystemConverter": "Chuyển đổi Hệ số",
+    "numberSystemConverterInfo": "Chuyển đổi giữa các hệ số khác nhau",
+
     "calculatorTools": "Công cụ tính toán",
     "calculatorToolsDesc": "Các máy tính chuyên dụng cho sức khỏe, tài chính và hơn thế nữa",
 
-        "lengthConverter": "Chuyển đổi Chiều dài",
-    "weightConverter": "Chuyển đổi Trọng lượng",
-    "@weightConverter": {
-        "description": "Tiêu đề cho công cụ chuyển đổi trọng lượng"
-    },
-    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
-    "@weightConverterInfo": {
-        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi trọng lượng"
-    },
-    "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
-    "@customizeWeightUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị trọng lượng"
-    },
-    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
-    "@weightConverterDesc": {
-        "description": "Mô tả cho công cụ chuyển đổi trọng lượng"
-    },
-    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
-    "@customizeMassUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
-    },
     "massConverter": "Chuyển đổi Khối lượng",
-    "@massConverter": {
-        "description": "Tiêu đề cho công cụ chuyển đổi khối lượng"
-    },
-    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
-    "@massConverterInfo": {
-        "description": "Tiêu đề cho hộp thoại thông tin chuyển đổi khối lượng"
-    },
-    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
-    "@massConverterDesc": {
-        "description": "Mô tả cho công cụ chuyển đổi khối lượng"
-    },
-    "customizeMassUnits": "Tùy chỉnh đơn vị Khối lượng",
-    "@customizeMassUnits": {
-        "description": "Tiêu đề cho hộp thoại tùy chỉnh đơn vị khối lượng"
-    },
-    "temperatureConverter": "Chuyển đổi Nhiệt độ",
-    "volumeConverter": "Chuyển đổi Thể tích",
-    "areaConverter": "Chuyển đổi Diện tích",
-    "speedConverter": "Chuyển đổi Tốc độ",
-    "timeConverter": "Chuyển đổi Thời gian",
-    "dataConverter": "Chuyển đổi Dung lượng",
-    "numberSystemConverter": "Chuyển đổi Hệ số",
-
-    "massConverter": "Chuyển đổi Khối lượng",
-    "massConverterInfo": "Thông tin Chuyển đổi Khối lượng",
-    "massConverterDesc": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
+    "massConverterInfo": "Chuyển đổi giữa các đơn vị khối lượng (kg, lb, oz)",
 
     "weightConverter": "Chuyển đổi Trọng lượng",
-    "weightConverterInfo": "Thông tin Chuyển đổi Trọng lượng",
+    "weightConverterInfo": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
     "customizeWeightUnits": "Tùy chỉnh đơn vị trọng lượng",
-    "weightConverterDesc": "Chuyển đổi giữa các đơn vị lực/trọng lượng (N, kgf, lbf)",
 
     "saveConverterToolsState": "Lưu Trạng Thái Công Cụ Chuyển Đổi",
     "saveConverterToolsStateDesc": "Tự động lưu cài đặt và tùy chọn của công cụ chuyển đổi",

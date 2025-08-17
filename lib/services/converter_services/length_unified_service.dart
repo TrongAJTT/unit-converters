@@ -23,7 +23,7 @@ class LengthUnifiedService {
 
       return [stateData]; // Single state object
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to load state: $e');
+      print('LengthUnifiedService: Failed to load state: $e');
       return [];
     }
   }
@@ -32,9 +32,9 @@ class LengthUnifiedService {
   static Future<void> saveState(List<Map<String, dynamic>> states) async {
     try {
       await ConverterToolsDataService.saveStates(_toolCode, {'states': states});
-      developer.log('LengthUnifiedService: Saved ${states.length} states');
+      print('LengthUnifiedService: Saved ${states.length} states');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to save state: $e');
+      print('LengthUnifiedService: Failed to save state: $e');
       rethrow;
     }
   }
@@ -43,9 +43,9 @@ class LengthUnifiedService {
   static Future<void> clearState() async {
     try {
       await ConverterToolsDataService.clearStates(_toolCode);
-      developer.log('LengthUnifiedService: Cleared states');
+      print('LengthUnifiedService: Cleared states');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to clear state: $e');
+      print('LengthUnifiedService: Failed to clear state: $e');
       rethrow;
     }
   }
@@ -57,7 +57,7 @@ class LengthUnifiedService {
     try {
       return await ConverterToolsDataService.getPresets(_toolCode);
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to load presets: $e');
+      print('LengthUnifiedService: Failed to load presets: $e');
       return [];
     }
   }
@@ -81,10 +81,10 @@ class LengthUnifiedService {
       };
 
       await ConverterToolsDataService.savePreset(_toolCode, preset);
-      developer.log('LengthUnifiedService: Saved preset: $name');
+      print('LengthUnifiedService: Saved preset: $name');
       return id;
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to save preset: $e');
+      print('LengthUnifiedService: Failed to save preset: $e');
       rethrow;
     }
   }
@@ -94,7 +94,7 @@ class LengthUnifiedService {
     try {
       return await ConverterToolsDataService.getPreset(_toolCode, id);
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to get preset: $e');
+      print('LengthUnifiedService: Failed to get preset: $e');
       return null;
     }
   }
@@ -103,9 +103,9 @@ class LengthUnifiedService {
   static Future<void> deletePreset(String id) async {
     try {
       await ConverterToolsDataService.deletePreset(_toolCode, id);
-      developer.log('LengthUnifiedService: Deleted preset $id');
+      print('LengthUnifiedService: Deleted preset $id');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to delete preset: $e');
+      print('LengthUnifiedService: Failed to delete preset: $e');
       rethrow;
     }
   }
@@ -128,9 +128,9 @@ class LengthUnifiedService {
       updatedData['lastModified'] = DateTime.now().toIso8601String();
 
       await ConverterToolsDataService.savePreset(_toolCode, updatedData);
-      developer.log('LengthUnifiedService: Updated preset $id');
+      print('LengthUnifiedService: Updated preset $id');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to update preset: $e');
+      print('LengthUnifiedService: Failed to update preset: $e');
       rethrow;
     }
   }
@@ -139,9 +139,9 @@ class LengthUnifiedService {
   static Future<void> renamePreset(String id, String newName) async {
     try {
       await updatePreset(id, name: newName);
-      developer.log('LengthUnifiedService: Renamed preset $id to $newName');
+      print('LengthUnifiedService: Renamed preset $id to $newName');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to rename preset: $e');
+      print('LengthUnifiedService: Failed to rename preset: $e');
       rethrow;
     }
   }
@@ -151,10 +151,12 @@ class LengthUnifiedService {
     try {
       final presets = await loadPresets();
       final normalizedName = name.trim().toLowerCase();
-      return presets.any((preset) =>
-          (preset['name'] ?? '').toString().toLowerCase() == normalizedName);
+      return presets.any(
+        (preset) =>
+            (preset['name'] ?? '').toString().toLowerCase() == normalizedName,
+      );
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to check preset name: $e');
+      print('LengthUnifiedService: Failed to check preset name: $e');
       return false;
     }
   }
@@ -173,9 +175,9 @@ class LengthUnifiedService {
   static Future<void> clearAllPresets() async {
     try {
       await ConverterToolsDataService.clearPresets(_toolCode);
-      developer.log('LengthUnifiedService: Cleared all presets');
+      print('LengthUnifiedService: Cleared all presets');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to clear presets: $e');
+      print('LengthUnifiedService: Failed to clear presets: $e');
       rethrow;
     }
   }
@@ -185,7 +187,7 @@ class LengthUnifiedService {
     try {
       return await loadPresets();
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to export presets: $e');
+      print('LengthUnifiedService: Failed to export presets: $e');
       return [];
     }
   }
@@ -195,12 +197,9 @@ class LengthUnifiedService {
   /// Get all length data (state + presets)
   static Future<Map<String, dynamic>> getAllData() async {
     try {
-      return {
-        'states': await loadState(),
-        'presets': await loadPresets(),
-      };
+      return {'states': await loadState(), 'presets': await loadPresets()};
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to get all data: $e');
+      print('LengthUnifiedService: Failed to get all data: $e');
       return {
         'states': <Map<String, dynamic>>[],
         'presets': <Map<String, dynamic>>[],
@@ -213,9 +212,9 @@ class LengthUnifiedService {
     try {
       await clearState();
       await clearAllPresets();
-      developer.log('LengthUnifiedService: Cleared all length data');
+      print('LengthUnifiedService: Cleared all length data');
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to clear all data: $e');
+      print('LengthUnifiedService: Failed to clear all data: $e');
       rethrow;
     }
   }
@@ -226,7 +225,7 @@ class LengthUnifiedService {
       final state = await loadState();
       return state.isNotEmpty;
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to check state: $e');
+      print('LengthUnifiedService: Failed to check state: $e');
       return false;
     }
   }
@@ -237,7 +236,7 @@ class LengthUnifiedService {
       final state = await loadState();
       return state.toString().length;
     } catch (e) {
-      developer.log('LengthUnifiedService: Failed to get state size: $e');
+      print('LengthUnifiedService: Failed to get state size: $e');
       return 0;
     }
   }

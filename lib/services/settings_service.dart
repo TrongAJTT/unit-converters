@@ -93,49 +93,6 @@ class SettingsService {
     await _settingsBox!.put(_settingsKey, settings);
   }
 
-  // Update fetch timeout
-  static Future<void> updateFetchTimeout(int timeoutSeconds) async {
-    final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(
-      fetchTimeoutSeconds: timeoutSeconds,
-    );
-    await saveSettings(updatedSettings);
-  }
-
-  // Get fetch timeout
-  static Future<int> getFetchTimeout() async {
-    final settings = await getSettings();
-    return settings.fetchTimeoutSeconds;
-  }
-
-  // Update feature state saving enabled
-  static Future<void> updateFeatureStateSaving(bool enabled) async {
-    final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(
-      featureStateSavingEnabled: enabled,
-    );
-    await saveSettings(updatedSettings);
-  }
-
-  // Get feature state saving enabled
-  static Future<bool> getFeatureStateSaving() async {
-    final settings = await getSettings();
-    return settings.featureStateSavingEnabled;
-  }
-
-  // Update fetch retry times
-  static Future<void> updateFetchRetryTimes(int times) async {
-    final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(fetchRetryTimes: times);
-    await saveSettings(updatedSettings);
-  }
-
-  // Get fetch retry times
-  static Future<int> getFetchRetryTimes() async {
-    final settings = await getSettings();
-    return settings.fetchRetryTimes;
-  }
-
   // Update save random tools state
   static Future<void> updateSaveRandomToolsState(bool enabled) async {
     final currentSettings = await getSettings();
@@ -149,19 +106,6 @@ class SettingsService {
   static Future<bool> getSaveRandomToolsState() async {
     final settings = await getSettings();
     return settings.saveRandomToolsState;
-  }
-
-  // Update compact tab layout
-  static Future<void> updateCompactTabLayout(bool enabled) async {
-    final currentSettings = await getSettings();
-    final updatedSettings = currentSettings.copyWith(compactTabLayout: enabled);
-    await saveSettings(updatedSettings);
-  }
-
-  // Get compact tab layout
-  static Future<bool> getCompactTabLayout() async {
-    final settings = await getSettings();
-    return settings.compactTabLayout;
   }
 
   // Update decimal places

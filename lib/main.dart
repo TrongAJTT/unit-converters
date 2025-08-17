@@ -82,9 +82,8 @@ Future<void> main() async {
   // Initialize settings service
   await SettingsService.initialize();
 
-  // Initialize converter tools data service
-  final converterDataService = ConverterToolsDataService();
-  await converterDataService.initialize();
+  // Note: ConverterToolsDataService will be initialized after security setup
+  // to ensure proper encryption handling
 
   // Initialize AppLogger service (depends on settings)
   // await AppLogger.instance.initialize();
@@ -219,7 +218,7 @@ class _MainAppState extends State<MainApp> with WidgetsBindingObserver {
       animation: settingsController,
       builder: (context, _) {
         return MaterialApp(
-          title: 'Random Please',
+          title: appName,
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           theme: ThemeData(
@@ -296,9 +295,20 @@ class _HomePageState extends State<HomePage> with WindowListener {
     if (!mounted) return;
 
     try {
-      // Initialize security manager (no automatic dialog)
+      // Initialize security manager first
       final securityManager = SecurityManager.instance;
       await securityManager.handleAppLaunch(context, loc);
+
+      // Initialize ConverterToolsDataService AFTER security is fully setup
+      // This ensures it uses the correct encryption settings
+      final converterDataService = ConverterToolsDataService();
+      try {
+        await converterDataService.initialize();
+        print('ConverterToolsDataService initialized successfully w');
+      } catch (e) {
+        print('Error initializing ConverterToolsDataService: $e');
+        // Continue anyway to avoid blocking the app
+      }
 
       if (mounted) {
         setState(() {
@@ -311,6 +321,7 @@ class _HomePageState extends State<HomePage> with WindowListener {
         }
       }
     } catch (e) {
+      print('Error in _handleAppLaunch: $e');
       // Handle error - for now just mark as checked so app can continue
       if (mounted) {
         setState(() {

@@ -23,7 +23,7 @@ class SpeedUnifiedService {
 
       return [stateData]; // Single state object
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to load state: $e');
+      print('SpeedUnifiedService: Failed to load state: $e');
       return [];
     }
   }
@@ -32,9 +32,9 @@ class SpeedUnifiedService {
   static Future<void> saveState(List<Map<String, dynamic>> states) async {
     try {
       await ConverterToolsDataService.saveStates(_toolCode, {'states': states});
-      developer.log('SpeedUnifiedService: Saved ${states.length} states');
+      print('SpeedUnifiedService: Saved ${states.length} states');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to save state: $e');
+      print('SpeedUnifiedService: Failed to save state: $e');
       rethrow;
     }
   }
@@ -43,9 +43,9 @@ class SpeedUnifiedService {
   static Future<void> clearState() async {
     try {
       await ConverterToolsDataService.clearStates(_toolCode);
-      developer.log('SpeedUnifiedService: Cleared states');
+      print('SpeedUnifiedService: Cleared states');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to clear state: $e');
+      print('SpeedUnifiedService: Failed to clear state: $e');
       rethrow;
     }
   }
@@ -57,7 +57,7 @@ class SpeedUnifiedService {
     try {
       return await ConverterToolsDataService.getPresets(_toolCode);
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to load presets: $e');
+      print('SpeedUnifiedService: Failed to load presets: $e');
       return [];
     }
   }
@@ -81,10 +81,10 @@ class SpeedUnifiedService {
       };
 
       await ConverterToolsDataService.savePreset(_toolCode, preset);
-      developer.log('SpeedUnifiedService: Saved preset: $name');
+      print('SpeedUnifiedService: Saved preset: $name');
       return id;
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to save preset: $e');
+      print('SpeedUnifiedService: Failed to save preset: $e');
       rethrow;
     }
   }
@@ -94,7 +94,7 @@ class SpeedUnifiedService {
     try {
       return await ConverterToolsDataService.getPreset(_toolCode, id);
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to get preset: $e');
+      print('SpeedUnifiedService: Failed to get preset: $e');
       return null;
     }
   }
@@ -103,9 +103,9 @@ class SpeedUnifiedService {
   static Future<void> deletePreset(String id) async {
     try {
       await ConverterToolsDataService.deletePreset(_toolCode, id);
-      developer.log('SpeedUnifiedService: Deleted preset $id');
+      print('SpeedUnifiedService: Deleted preset $id');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to delete preset: $e');
+      print('SpeedUnifiedService: Failed to delete preset: $e');
       rethrow;
     }
   }
@@ -128,9 +128,9 @@ class SpeedUnifiedService {
       updatedData['lastModified'] = DateTime.now().toIso8601String();
 
       await ConverterToolsDataService.savePreset(_toolCode, updatedData);
-      developer.log('SpeedUnifiedService: Updated preset $id');
+      print('SpeedUnifiedService: Updated preset $id');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to update preset: $e');
+      print('SpeedUnifiedService: Failed to update preset: $e');
       rethrow;
     }
   }
@@ -139,9 +139,9 @@ class SpeedUnifiedService {
   static Future<void> renamePreset(String id, String newName) async {
     try {
       await updatePreset(id, name: newName);
-      developer.log('SpeedUnifiedService: Renamed preset $id to $newName');
+      print('SpeedUnifiedService: Renamed preset $id to $newName');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to rename preset: $e');
+      print('SpeedUnifiedService: Failed to rename preset: $e');
       rethrow;
     }
   }
@@ -151,10 +151,12 @@ class SpeedUnifiedService {
     try {
       final presets = await loadPresets();
       final normalizedName = name.trim().toLowerCase();
-      return presets.any((preset) =>
-          (preset['name'] ?? '').toString().toLowerCase() == normalizedName);
+      return presets.any(
+        (preset) =>
+            (preset['name'] ?? '').toString().toLowerCase() == normalizedName,
+      );
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to check preset name: $e');
+      print('SpeedUnifiedService: Failed to check preset name: $e');
       return false;
     }
   }
@@ -173,9 +175,9 @@ class SpeedUnifiedService {
   static Future<void> clearAllPresets() async {
     try {
       await ConverterToolsDataService.clearPresets(_toolCode);
-      developer.log('SpeedUnifiedService: Cleared all presets');
+      print('SpeedUnifiedService: Cleared all presets');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to clear presets: $e');
+      print('SpeedUnifiedService: Failed to clear presets: $e');
       rethrow;
     }
   }
@@ -185,7 +187,7 @@ class SpeedUnifiedService {
     try {
       return await loadPresets();
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to export presets: $e');
+      print('SpeedUnifiedService: Failed to export presets: $e');
       return [];
     }
   }
@@ -195,12 +197,9 @@ class SpeedUnifiedService {
   /// Get all speed data (state + presets)
   static Future<Map<String, dynamic>> getAllData() async {
     try {
-      return {
-        'states': await loadState(),
-        'presets': await loadPresets(),
-      };
+      return {'states': await loadState(), 'presets': await loadPresets()};
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to get all data: $e');
+      print('SpeedUnifiedService: Failed to get all data: $e');
       return {
         'states': <Map<String, dynamic>>[],
         'presets': <Map<String, dynamic>>[],
@@ -213,9 +212,9 @@ class SpeedUnifiedService {
     try {
       await clearState();
       await clearAllPresets();
-      developer.log('SpeedUnifiedService: Cleared all speed data');
+      print('SpeedUnifiedService: Cleared all speed data');
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to clear all data: $e');
+      print('SpeedUnifiedService: Failed to clear all data: $e');
       rethrow;
     }
   }
@@ -226,7 +225,7 @@ class SpeedUnifiedService {
       final state = await loadState();
       return state.isNotEmpty;
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to check state: $e');
+      print('SpeedUnifiedService: Failed to check state: $e');
       return false;
     }
   }
@@ -237,7 +236,7 @@ class SpeedUnifiedService {
       final state = await loadState();
       return state.toString().length;
     } catch (e) {
-      developer.log('SpeedUnifiedService: Failed to get state size: $e');
+      print('SpeedUnifiedService: Failed to get state size: $e');
       return 0;
     }
   }

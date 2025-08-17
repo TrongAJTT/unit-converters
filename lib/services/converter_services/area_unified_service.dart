@@ -23,7 +23,7 @@ class AreaUnifiedService {
 
       return [stateData]; // Single state object
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to load state: $e');
+      print('AreaUnifiedService: Failed to load state: $e');
       return [];
     }
   }
@@ -32,9 +32,9 @@ class AreaUnifiedService {
   static Future<void> saveState(List<Map<String, dynamic>> states) async {
     try {
       await ConverterToolsDataService.saveStates(_toolCode, {'states': states});
-      developer.log('AreaUnifiedService: Saved ${states.length} states');
+      print('AreaUnifiedService: Saved ${states.length} states');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to save state: $e');
+      print('AreaUnifiedService: Failed to save state: $e');
       rethrow;
     }
   }
@@ -43,9 +43,9 @@ class AreaUnifiedService {
   static Future<void> clearState() async {
     try {
       await ConverterToolsDataService.clearStates(_toolCode);
-      developer.log('AreaUnifiedService: Cleared states');
+      print('AreaUnifiedService: Cleared states');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to clear state: $e');
+      print('AreaUnifiedService: Failed to clear state: $e');
       rethrow;
     }
   }
@@ -56,7 +56,7 @@ class AreaUnifiedService {
       final state = await loadState();
       return state.isNotEmpty;
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to check state: $e');
+      print('AreaUnifiedService: Failed to check state: $e');
       return false;
     }
   }
@@ -67,7 +67,7 @@ class AreaUnifiedService {
       final state = await loadState();
       return state.toString().length;
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to get state size: $e');
+      print('AreaUnifiedService: Failed to get state size: $e');
       return 0;
     }
   }
@@ -79,7 +79,7 @@ class AreaUnifiedService {
     try {
       return await ConverterToolsDataService.getPresets(_toolCode);
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to load presets: $e');
+      print('AreaUnifiedService: Failed to load presets: $e');
       return [];
     }
   }
@@ -103,10 +103,10 @@ class AreaUnifiedService {
       };
 
       await ConverterToolsDataService.savePreset(_toolCode, preset);
-      developer.log('AreaUnifiedService: Saved preset: $name');
+      print('AreaUnifiedService: Saved preset: $name');
       return id;
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to save preset: $e');
+      print('AreaUnifiedService: Failed to save preset: $e');
       rethrow;
     }
   }
@@ -116,7 +116,7 @@ class AreaUnifiedService {
     try {
       return await ConverterToolsDataService.getPreset(_toolCode, id);
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to get preset: $e');
+      print('AreaUnifiedService: Failed to get preset: $e');
       return null;
     }
   }
@@ -125,9 +125,9 @@ class AreaUnifiedService {
   static Future<void> deletePreset(String id) async {
     try {
       await ConverterToolsDataService.deletePreset(_toolCode, id);
-      developer.log('AreaUnifiedService: Deleted preset $id');
+      print('AreaUnifiedService: Deleted preset $id');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to delete preset: $e');
+      print('AreaUnifiedService: Failed to delete preset: $e');
       rethrow;
     }
   }
@@ -150,9 +150,9 @@ class AreaUnifiedService {
       updatedData['lastModified'] = DateTime.now().toIso8601String();
 
       await ConverterToolsDataService.savePreset(_toolCode, updatedData);
-      developer.log('AreaUnifiedService: Updated preset $id');
+      print('AreaUnifiedService: Updated preset $id');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to update preset: $e');
+      print('AreaUnifiedService: Failed to update preset: $e');
       rethrow;
     }
   }
@@ -161,9 +161,9 @@ class AreaUnifiedService {
   static Future<void> renamePreset(String id, String newName) async {
     try {
       await updatePreset(id, name: newName);
-      developer.log('AreaUnifiedService: Renamed preset $id to $newName');
+      print('AreaUnifiedService: Renamed preset $id to $newName');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to rename preset: $e');
+      print('AreaUnifiedService: Failed to rename preset: $e');
       rethrow;
     }
   }
@@ -173,10 +173,12 @@ class AreaUnifiedService {
     try {
       final presets = await loadPresets();
       final normalizedName = name.trim().toLowerCase();
-      return presets.any((preset) =>
-          (preset['name'] ?? '').toString().toLowerCase() == normalizedName);
+      return presets.any(
+        (preset) =>
+            (preset['name'] ?? '').toString().toLowerCase() == normalizedName,
+      );
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to check preset name: $e');
+      print('AreaUnifiedService: Failed to check preset name: $e');
       return false;
     }
   }
@@ -195,9 +197,9 @@ class AreaUnifiedService {
   static Future<void> clearAllPresets() async {
     try {
       await ConverterToolsDataService.clearPresets(_toolCode);
-      developer.log('AreaUnifiedService: Cleared all presets');
+      print('AreaUnifiedService: Cleared all presets');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to clear presets: $e');
+      print('AreaUnifiedService: Failed to clear presets: $e');
       rethrow;
     }
   }
@@ -207,7 +209,7 @@ class AreaUnifiedService {
     try {
       return await loadPresets();
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to export presets: $e');
+      print('AreaUnifiedService: Failed to export presets: $e');
       return [];
     }
   }
@@ -217,12 +219,9 @@ class AreaUnifiedService {
   /// Get all area data (state + presets)
   static Future<Map<String, dynamic>> getAllData() async {
     try {
-      return {
-        'states': await loadState(),
-        'presets': await loadPresets(),
-      };
+      return {'states': await loadState(), 'presets': await loadPresets()};
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to get all data: $e');
+      print('AreaUnifiedService: Failed to get all data: $e');
       return {
         'states': <Map<String, dynamic>>[],
         'presets': <Map<String, dynamic>>[],
@@ -235,9 +234,9 @@ class AreaUnifiedService {
     try {
       await clearState();
       await clearAllPresets();
-      developer.log('AreaUnifiedService: Cleared all area data');
+      print('AreaUnifiedService: Cleared all area data');
     } catch (e) {
-      developer.log('AreaUnifiedService: Failed to clear all data: $e');
+      print('AreaUnifiedService: Failed to clear all data: $e');
       rethrow;
     }
   }

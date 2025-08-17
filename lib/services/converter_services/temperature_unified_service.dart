@@ -23,7 +23,7 @@ class TemperatureUnifiedService {
 
       return [stateData]; // Single state object
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to load state: $e');
+      print('TemperatureUnifiedService: Failed to load state: $e');
       return [];
     }
   }
@@ -32,9 +32,9 @@ class TemperatureUnifiedService {
   static Future<void> saveState(List<Map<String, dynamic>> states) async {
     try {
       await ConverterToolsDataService.saveStates(_toolCode, {'states': states});
-      developer.log('TemperatureUnifiedService: Saved ${states.length} states');
+      print('TemperatureUnifiedService: Saved ${states.length} states');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to save state: $e');
+      print('TemperatureUnifiedService: Failed to save state: $e');
       rethrow;
     }
   }
@@ -43,9 +43,9 @@ class TemperatureUnifiedService {
   static Future<void> clearState() async {
     try {
       await ConverterToolsDataService.clearStates(_toolCode);
-      developer.log('TemperatureUnifiedService: Cleared states');
+      print('TemperatureUnifiedService: Cleared states');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to clear state: $e');
+      print('TemperatureUnifiedService: Failed to clear state: $e');
       rethrow;
     }
   }
@@ -57,7 +57,7 @@ class TemperatureUnifiedService {
     try {
       return await ConverterToolsDataService.getPresets(_toolCode);
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to load presets: $e');
+      print('TemperatureUnifiedService: Failed to load presets: $e');
       return [];
     }
   }
@@ -81,10 +81,10 @@ class TemperatureUnifiedService {
       };
 
       await ConverterToolsDataService.savePreset(_toolCode, preset);
-      developer.log('TemperatureUnifiedService: Saved preset: $name');
+      print('TemperatureUnifiedService: Saved preset: $name');
       return id;
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to save preset: $e');
+      print('TemperatureUnifiedService: Failed to save preset: $e');
       rethrow;
     }
   }
@@ -94,7 +94,7 @@ class TemperatureUnifiedService {
     try {
       return await ConverterToolsDataService.getPreset(_toolCode, id);
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to get preset: $e');
+      print('TemperatureUnifiedService: Failed to get preset: $e');
       return null;
     }
   }
@@ -103,9 +103,9 @@ class TemperatureUnifiedService {
   static Future<void> deletePreset(String id) async {
     try {
       await ConverterToolsDataService.deletePreset(_toolCode, id);
-      developer.log('TemperatureUnifiedService: Deleted preset $id');
+      print('TemperatureUnifiedService: Deleted preset $id');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to delete preset: $e');
+      print('TemperatureUnifiedService: Failed to delete preset: $e');
       rethrow;
     }
   }
@@ -128,9 +128,9 @@ class TemperatureUnifiedService {
       updatedData['lastModified'] = DateTime.now().toIso8601String();
 
       await ConverterToolsDataService.savePreset(_toolCode, updatedData);
-      developer.log('TemperatureUnifiedService: Updated preset $id');
+      print('TemperatureUnifiedService: Updated preset $id');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to update preset: $e');
+      print('TemperatureUnifiedService: Failed to update preset: $e');
       rethrow;
     }
   }
@@ -139,10 +139,11 @@ class TemperatureUnifiedService {
   static Future<void> renamePreset(String id, String newName) async {
     try {
       await updatePreset(id, name: newName);
-      developer
-          .log('TemperatureUnifiedService: Renamed preset $id to $newName');
+      developer.log(
+        'TemperatureUnifiedService: Renamed preset $id to $newName',
+      );
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to rename preset: $e');
+      print('TemperatureUnifiedService: Failed to rename preset: $e');
       rethrow;
     }
   }
@@ -152,11 +153,14 @@ class TemperatureUnifiedService {
     try {
       final presets = await loadPresets();
       final normalizedName = name.trim().toLowerCase();
-      return presets.any((preset) =>
-          (preset['name'] ?? '').toString().toLowerCase() == normalizedName);
+      return presets.any(
+        (preset) =>
+            (preset['name'] ?? '').toString().toLowerCase() == normalizedName,
+      );
     } catch (e) {
-      developer
-          .log('TemperatureUnifiedService: Failed to check preset name: $e');
+      developer.log(
+        'TemperatureUnifiedService: Failed to check preset name: $e',
+      );
       return false;
     }
   }
@@ -175,9 +179,9 @@ class TemperatureUnifiedService {
   static Future<void> clearAllPresets() async {
     try {
       await ConverterToolsDataService.clearPresets(_toolCode);
-      developer.log('TemperatureUnifiedService: Cleared all presets');
+      print('TemperatureUnifiedService: Cleared all presets');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to clear presets: $e');
+      print('TemperatureUnifiedService: Failed to clear presets: $e');
       rethrow;
     }
   }
@@ -187,7 +191,7 @@ class TemperatureUnifiedService {
     try {
       return await loadPresets();
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to export presets: $e');
+      print('TemperatureUnifiedService: Failed to export presets: $e');
       return [];
     }
   }
@@ -197,12 +201,9 @@ class TemperatureUnifiedService {
   /// Get all temperature data (state + presets)
   static Future<Map<String, dynamic>> getAllData() async {
     try {
-      return {
-        'states': await loadState(),
-        'presets': await loadPresets(),
-      };
+      return {'states': await loadState(), 'presets': await loadPresets()};
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to get all data: $e');
+      print('TemperatureUnifiedService: Failed to get all data: $e');
       return {
         'states': <Map<String, dynamic>>[],
         'presets': <Map<String, dynamic>>[],
@@ -215,9 +216,9 @@ class TemperatureUnifiedService {
     try {
       await clearState();
       await clearAllPresets();
-      developer.log('TemperatureUnifiedService: Cleared all temperature data');
+      print('TemperatureUnifiedService: Cleared all temperature data');
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to clear all data: $e');
+      print('TemperatureUnifiedService: Failed to clear all data: $e');
       rethrow;
     }
   }
@@ -228,7 +229,7 @@ class TemperatureUnifiedService {
       final state = await loadState();
       return state.isNotEmpty;
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to check state: $e');
+      print('TemperatureUnifiedService: Failed to check state: $e');
       return false;
     }
   }
@@ -239,7 +240,7 @@ class TemperatureUnifiedService {
       final state = await loadState();
       return state.toString().length;
     } catch (e) {
-      developer.log('TemperatureUnifiedService: Failed to get state size: $e');
+      print('TemperatureUnifiedService: Failed to get state size: $e');
       return 0;
     }
   }

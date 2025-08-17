@@ -39,7 +39,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'length',
         title: loc.lengthConverter,
-        subtitle: 'Convert between different units of length',
+        subtitle: loc.lengthConverterInfo,
         icon: Icons.straighten,
         color: const Color(0xFF2196F3), // Blue
         screenBuilder: () => LengthConverterNewScreen(isEmbedded: isEmbedded),
@@ -47,7 +47,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'mass',
         title: loc.massConverter,
-        subtitle: loc.massConverterDesc,
+        subtitle: loc.massConverterInfo,
         icon: Icons.fitness_center,
         color: const Color(0xFFFF9800), // Orange
         screenBuilder: () => MassConverterNewScreen(isEmbedded: isEmbedded),
@@ -55,7 +55,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'temperature',
         title: loc.temperatureConverter,
-        subtitle: 'Convert between different temperature scales',
+        subtitle: loc.temperatureConverterInfo,
         icon: Icons.thermostat,
         color: const Color(0xFFF44336), // Red
         screenBuilder: () => TemperatureConverterScreen(isEmbedded: isEmbedded),
@@ -63,7 +63,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'volume',
         title: loc.volumeConverter,
-        subtitle: 'Convert between different units of volume',
+        subtitle: loc.volumeConverterInfo,
         icon: Icons.local_drink,
         color: const Color(0xFF00BCD4), // Cyan
         screenBuilder: () => VolumeConverterScreen(isEmbedded: isEmbedded),
@@ -71,7 +71,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'area',
         title: loc.areaConverter,
-        subtitle: 'Convert between different units of area',
+        subtitle: loc.areaConverterInfo,
         icon: Icons.crop_square,
         color: const Color(0xFF9C27B0), // Purple
         screenBuilder: () => AreaConverterScreen(isEmbedded: isEmbedded),
@@ -79,7 +79,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'speed',
         title: loc.speedConverter,
-        subtitle: 'Convert between different units of speed',
+        subtitle: loc.speedConverterInfo,
         icon: Icons.speed,
         color: const Color(0xFF4CAF50), // Green
         screenBuilder: () => SpeedConverterScreen(isEmbedded: isEmbedded),
@@ -87,15 +87,15 @@ class ConverterToolsManager {
       ToolItem(
         id: 'time',
         title: loc.timeConverter,
-        subtitle: 'Convert between different units of time',
+        subtitle: loc.timeConverterInfo,
         icon: Icons.access_time,
         color: const Color(0xFFE91E63), // Pink
         screenBuilder: () => TimeConverterScreen(isEmbedded: isEmbedded),
       ),
       ToolItem(
         id: 'data',
-        title: 'Data Storage Converter',
-        subtitle: 'Convert between different units of data storage',
+        title: loc.dataConverter,
+        subtitle: loc.dataConverterInfo,
         icon: Icons.storage,
         color: const Color(0xFF795548), // Brown
         screenBuilder: () => DataConverterScreen(isEmbedded: isEmbedded),
@@ -103,7 +103,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'weight',
         title: loc.weightConverter,
-        subtitle: loc.weightConverterDesc,
+        subtitle: loc.weightConverterInfo,
         icon: Icons.scale,
         color: const Color(0xFF607D8B), // Blue Grey
         screenBuilder: () => WeightConverterScreen(isEmbedded: isEmbedded),
@@ -111,7 +111,7 @@ class ConverterToolsManager {
       ToolItem(
         id: 'numbersystem',
         title: loc.numberSystemConverter,
-        subtitle: 'Convert between different number systems',
+        subtitle: loc.numberSystemConverterInfo,
         icon: Icons.calculate,
         color: const Color(0xFF3F51B5), // Indigo
         screenBuilder: () =>
