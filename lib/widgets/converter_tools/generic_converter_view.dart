@@ -528,16 +528,16 @@ class _GenericConverterViewState extends State<GenericConverterView> {
   void _toggleFocusMode(BuildContext context, ConverterController controller) {
     controller.toggleFocusMode();
 
-    final exitInstruction = FocusModeService.getExitInstruction(
-      context,
-      isEmbedded: widget.isEmbedded,
-    );
+    // final exitInstruction = FocusModeService.getExitInstruction(
+    //   context,
+    //   isEmbedded: widget.isEmbedded,
+    // );
 
-    FocusModeService.showFocusModeNotification(
-      context,
-      isEnabled: controller.isFocusMode,
-      exitInstruction: exitInstruction,
-    );
+    // FocusModeService.showFocusModeNotification(
+    //   context,
+    //   isEnabled: controller.isFocusMode,
+    //   exitInstruction: exitInstruction,
+    // );
   }
 
   Future<void> _showResetLayoutConfirmation(

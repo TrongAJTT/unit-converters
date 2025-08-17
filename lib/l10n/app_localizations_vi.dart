@@ -1767,6 +1767,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get edit => 'Chỉnh sửa';
 
   @override
+  String get editName => 'Sửa tên';
+
+  @override
   String get customizeUnits => 'Tùy chỉnh Đơn vị';
 
   @override

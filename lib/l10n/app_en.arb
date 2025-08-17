@@ -826,6 +826,7 @@
 
     "dragging": "Dragging...",
     "edit": "Edit",
+    "editName": "Edit Name",
     "customizeUnits": "Customize Units",
     "cardName": "Card Name",
     "cardNameHint": "Enter card name (max 20 characters)",

@@ -359,7 +359,7 @@ class ConverterTableWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   size: 16,
                 ),
-                tooltip: l10n.edit,
+                tooltip: l10n.editName,
                 constraints: const BoxConstraints(minWidth: 24, minHeight: 24),
                 padding: EdgeInsets.zero,
               ),
@@ -440,34 +440,41 @@ class ConverterTableWidget extends StatelessWidget {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Edit Card Name'), // Will be localized
-        content: TextField(
-          controller: textController,
-          maxLength: 20,
-          decoration: InputDecoration(
-            labelText: l10n.cardName,
-            hintText: l10n.cardNameHint,
-            border: const OutlineInputBorder(),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text(l10n.editName),
+          content: ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 300, maxWidth: 400),
+            child: TextField(
+              controller: textController,
+              maxLength: 20,
+              decoration: InputDecoration(
+                labelText: l10n.cardName,
+                hintText: l10n.cardNameHint,
+                border: const OutlineInputBorder(),
+                counterText: '${textController.text.length}/20',
+              ),
+              autofocus: true,
+              onChanged: (_) => setState(() {}),
+            ),
           ),
-          autofocus: true,
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.cancel),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final newName = textController.text.trim();
+                if (newName.isNotEmpty && newName.length <= 20) {
+                  controller.updateCardName(cardIndex, newName);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text(l10n.save),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final newName = textController.text.trim();
-              if (newName.isNotEmpty && newName.length <= 20) {
-                controller.updateCardName(cardIndex, newName);
-                Navigator.of(context).pop();
-              }
-            },
-            child: Text(l10n.save),
-          ),
-        ],
       ),
     );
   }

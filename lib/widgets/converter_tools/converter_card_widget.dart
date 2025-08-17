@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:unit_converters/controllers/converter_controller.dart';
 import 'package:unit_converters/models/converter_models/converter_base.dart';
 import 'package:unit_converters/l10n/app_localizations.dart';
+import 'package:unit_converters/utils/variables_utils.dart';
 import 'generic_unit_custom_dialog.dart';
 
 class ConverterCardWidget extends StatefulWidget {
@@ -390,7 +391,7 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
             color: Theme.of(context).colorScheme.primary,
             size: 18,
           ),
-          tooltip: l10n.edit,
+          tooltip: l10n.editName,
           padding: const EdgeInsets.all(4),
           constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
         ),
@@ -425,6 +426,21 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
     );
   }
 
+  bool checkUseColumnLayout(BoxConstraints constraints) {
+    // Calculate cards per row based on screen width
+    // Assume card minimum width of 300px + margins
+    if (!isDesktopContext(context)) {
+      return true;
+    }
+    final totalCards = controller.state.cards.length;
+    final cardsPerRow = (constraints.maxWidth / 320).floor().clamp(
+      1,
+      totalCards,
+    );
+    final cardWidth = constraints.maxWidth / cardsPerRow;
+    return cardWidth < 400;
+  }
+
   Widget _buildBaseUnitSection(
     BuildContext context,
     AppLocalizations l10n,
@@ -433,9 +449,7 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
   ) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final useColumnLayout = constraints.maxWidth < 300;
-
-        if (useColumnLayout) {
+        if (checkUseColumnLayout(constraints)) {
           return Column(
             children: [
               _buildBaseUnitDropdown(context, l10n, card, cardControllers),
@@ -444,11 +458,21 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
             ],
           );
         } else {
-          return Column(
+          // Use Row layout for wider screens
+          return Row(
             children: [
-              _buildBaseUnitDropdown(context, l10n, card, cardControllers),
-              const SizedBox(height: 8),
-              _buildAmountField(context, l10n, card, cardControllers),
+              Expanded(
+                child: _buildBaseUnitDropdown(
+                  context,
+                  l10n,
+                  card,
+                  cardControllers,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildAmountField(context, l10n, card, cardControllers),
+              ),
             ],
           );
         }
@@ -869,34 +893,41 @@ class _ConverterCardWidgetState extends State<ConverterCardWidget> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.edit),
-        content: TextField(
-          controller: textController,
-          maxLength: 20,
-          decoration: InputDecoration(
-            labelText: l10n.cardName,
-            hintText: l10n.cardNameHint,
-            border: const OutlineInputBorder(),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: Text(l10n.editName),
+          content: ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 300, maxWidth: 400),
+            child: TextField(
+              controller: textController,
+              maxLength: 20,
+              decoration: InputDecoration(
+                labelText: l10n.cardName,
+                hintText: l10n.cardNameHint,
+                border: const OutlineInputBorder(),
+                counterText: '${textController.text.length}/20',
+              ),
+              autofocus: true,
+              onChanged: (_) => setState(() {}),
+            ),
           ),
-          autofocus: true,
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(l10n.cancel),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final newName = textController.text.trim();
+                if (newName.isNotEmpty && newName.length <= 30) {
+                  controller.updateCardName(cardIndex, newName);
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text(l10n.save),
+            ),
+          ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final newName = textController.text.trim();
-              if (newName.isNotEmpty && newName.length <= 20) {
-                controller.updateCardName(cardIndex, newName);
-                Navigator.of(context).pop();
-              }
-            },
-            child: Text(l10n.save),
-          ),
-        ],
       ),
     );
   }

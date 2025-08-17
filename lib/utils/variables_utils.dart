@@ -30,6 +30,10 @@ String getScreenTitle(String? title) {
   return title ?? appName;
 }
 
+bool isDesktopLayout(double width) {
+  return width > 600; // Desktop threshold
+}
+
 bool isDesktopContext(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   return width > 600; // Desktop threshold

@@ -1767,6 +1767,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get edit => 'Edit';
 
   @override
+  String get editName => 'Edit Name';
+
+  @override
   String get customizeUnits => 'Customize Units';
 
   @override

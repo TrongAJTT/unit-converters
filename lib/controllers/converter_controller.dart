@@ -156,7 +156,7 @@ class ConverterController extends ChangeNotifier {
           final cardsData = savedStateData['cards'] as List? ?? [];
 
           print('🔄 Converting ${cardsData.length} cards from JSON...');
-          
+
           for (final cardData in cardsData) {
             try {
               // Cast to Map<String, dynamic> regardless of the original type
@@ -169,7 +169,7 @@ class ConverterController extends ChangeNotifier {
               print('❌ Card data: $cardData (${cardData.runtimeType})');
             }
           }
-          
+
           print('📋 Final cards list: ${cards.length} cards');
 
           final globalVisibleUnits = Set<String>.from(

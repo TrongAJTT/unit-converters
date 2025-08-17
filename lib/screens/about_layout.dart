@@ -256,22 +256,6 @@ class _AboutLayoutState extends State<AboutLayout> {
             trailing: const Icon(Icons.open_in_new),
             onTap: () => UriUtils.launchInBrowser(buyMeACoffeeUrl, context),
           ),
-          // Check language is Vietnamese for Momo donation
-          if (Localizations.localeOf(context).languageCode == 'vi') ...[
-            ListTile(
-              leading: const Icon(Icons.mobile_friendly),
-              title: const Text('Momo'),
-              subtitle: Text(l10n.momoDonateDesc),
-              trailing: const Icon(Icons.open_in_new),
-              onTap: () => UriUtils.launchInBrowserWithConfirm(
-                context: context,
-                url: momoDonateUrl,
-                content:
-                    'Momo không phải là nền tảng ủng hộ chuyên dụng!\n'
-                    'Vui lòng để lại email để mình có thể liên hệ bạn.',
-              ),
-            ),
-          ],
 
           const SizedBox(height: 32),
 

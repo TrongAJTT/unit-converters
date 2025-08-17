@@ -9,8 +9,6 @@ const String appAssetIcon = 'assets/app_icon.png';
 const String githubRepoUrl = 'https://github.com/TrongAJTT/unit-converters';
 const String githubSponsorUrl = 'https://github.com/sponsors/TrongAJTT';
 const String buyMeACoffeeUrl = 'https://www.buymeacoffee.com/trongajtt';
-const String momoDonateUrl =
-    'https://me.momo.vn/8vI1TzseFRFQF3UquBU1fz/5xe79k5vr5VAb7r';
 
 // Replace <locale> with the actual locale code
 const String supportersAcknowledgmentUrl =

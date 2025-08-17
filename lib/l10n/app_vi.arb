@@ -765,6 +765,7 @@
     "quickActions": "Tác vụ nhanh",
     "quickActionsDesc": "Tùy chỉnh các phím tắt xuất hiện khi bạn nhấn giữ biểu tượng ứng dụng.",
     "edit": "Sửa",
+    "editName": "Sửa tên",
     "cacheDetails": "Chi tiết bộ nhớ đệm",
     "viewCacheDetails": "Xem chi tiết",
     "cacheSize": "Kích thước bộ nhớ đệm",

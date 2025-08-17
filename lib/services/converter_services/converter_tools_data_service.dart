@@ -158,7 +158,7 @@ class ConverterToolsDataService {
 
       print('💾 SAVING - Key: $key, Tool: $toolCode, Type: $dataType');
       print('💾 Data keys: ${data.keys.toList()}');
-      
+
       // Show card count if this is state data
       if (dataType == 'state' && data.containsKey('cards')) {
         final cards = data['cards'] as List?;
@@ -167,13 +167,13 @@ class ConverterToolsDataService {
           print('💾 Card names: ${cards.map((c) => c['name']).toList()}');
         }
       }
-      
+
       await _database.put(key, entry);
 
       // Debug: Check total entries
       final totalEntries = _database.length;
       print('📊 Total tool entries in box: $totalEntries');
-      
+
       // Show all keys in box
       final allKeys = _database.keys.toList();
       print('🔑 All tool keys: $allKeys');
@@ -198,7 +198,7 @@ class ConverterToolsDataService {
       if (entry != null && entry is Map) {
         final data = Map<String, dynamic>.from(entry['data'] ?? {});
         print('📖 Data keys loaded: ${data.keys.toList()}');
-        
+
         // Show card count if this is state data
         if (dataType == 'state' && data.containsKey('cards')) {
           final cards = data['cards'] as List?;
@@ -207,7 +207,7 @@ class ConverterToolsDataService {
             print('📖 Card names: ${cards.map((c) => c['name']).toList()}');
           }
         }
-        
+
         return data;
       } else {
         print('📖 No data found for key: $key');
