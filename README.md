@@ -1,7 +1,7 @@
 <div align="center">
     <img style="width:30%;" src="./assets/app_icon.png"/>
     <h1>Unit Converters</h1>
-    <h3>Comprehensive unit conversion and calculation tools for everyday use</h3> 
+    <h3>Fast and convenient converter tools with multiple units.</h3> 
 </div>
 
 **A powerful collection of unit converters and calculation tools!** A versatile, cross-platform Flutter application designed to provide essential conversion utilities and mathematical tools for daily use - from basic unit conversions to advanced calculations and random generators.
@@ -9,8 +9,9 @@
 ## 📸 Screenshot
 
 <div align="center">
-    <!-- Add screenshots here when available -->
-    <p><em>Screenshots coming soon...</em></p>
+    <img style="width:90%;" src="./assets/previews/desktop-1.png"/>
+    <img style="width:90%;" src="./assets/previews/desktop-2.png"/>
+    <img style="width:90%;" src="./assets/previews/desktop-3.png"/>
 </div>
 
 ✨ **Available on Windows, Android, and Web**  
